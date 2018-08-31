@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.dao.FloorMapper">
+    <resultMap id="BaseResultMap" type="com.forum.entity.Forum">
+        <id column="forum_id" property="forum_id" jdbcType="VARCHAR"/>
+        <result column="forum_name" property="forum_name" jdbcType="VARCHAR"/>
+        <result column="forum_text" property="forum_text" jdbcType="VARCHAR"/>
+        <result column="fid" property="fid" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    forum_id, forum_name, forum_text, fid
+  </sql>
+    <select id="selectByForumId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from forum
+        where forum_id = #{forum_id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByForumId" parameterType="java.lang.String">
+    delete from forum
+    where forum_id = #{forum_id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.forum.entity.Forum">
+        insert into forum
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="forum_id != null">
+                forum_id,
+            </if>
+            <if test="forum_name != null">
+                forum_name,
+            </if>
+            <if test="forum_text != null">
+                forum_text,
+            </if>
+            <if test="fid != null">
+                fid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="forum_id != null">
+                #{forum_id,jdbcType=VARCHAR},
+            </if>
+            <if test="forum_name != null">
+                #{forum_name,jdbcType=VARCHAR},
+            </if>
+            <if test="forum_text != null">
+                #{forum_text,jdbcType=VARCHAR},
+            </if>
+            <if test="fid != null">
+                #{fid,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByForumId" parameterType="com.forum.entity.Forum">
+    update forum
+    set forum_id = #{forum_id,jdbcType=VARCHAR},
+      forum_name = #{forum_name,jdbcType=VARCHAR},
+      forum_text = #{forum_text,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=VARCHAR}
+    where forum_id = #{forum_id,jdbcType=VARCHAR}
+  </update>
+</mapper>
