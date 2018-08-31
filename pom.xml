@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>forum</name>
-    <description>Demo project for Spring Boot</description>
+    <description>a colleage-student forum</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -25,6 +25,30 @@
     </properties>
 
     <dependencies>
+
+        <!--starter-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.9</version>
+        </dependency>
+
+        <!--logback-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
