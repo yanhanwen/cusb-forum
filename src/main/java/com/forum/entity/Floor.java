@@ -17,7 +17,7 @@ public class Floor {
     }
 
     public void setFloor_id(String floor_id) {
-        this.floor_id = floor_id;
+        this.floor_id = floor_id == null ? null : floor_id.trim();
     }
 
     public int getFloor_num() {

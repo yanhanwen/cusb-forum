@@ -11,7 +11,7 @@ public class Forum {
     }
 
     public void setForum_id(String forum_id) {
-        this.forum_id = forum_id;
+        this.forum_id = forum_id == null ? null : forum_id.trim();
     }
 
     public String getForum_name() {

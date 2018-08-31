@@ -17,7 +17,7 @@ public class User {
     }
 
     public void setUser_id(String user_id) {
-        this.user_id = user_id;
+        this.user_id = user_id == null ? null : user_id.trim();
     }
 
     public String getUser_name() {

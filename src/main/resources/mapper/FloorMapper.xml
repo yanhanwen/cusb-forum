@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.dao.FloorMapper">
+    <resultMap id="BaseResultMap" type="com.forum.entity.Floor">
+        <id column="floor_id" property="floor_id" jdbcType="VARCHAR"/>
+        <result column="floor_num" property="floor_num" jdbcType="INTEGER"/>
+        <result column="floor_good" property="floor_good" jdbcType="INTEGER"/>
+        <result column="floor_text" property="floor_text" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="post_id" property="applyInfoFlag" jdbcType="VARCHAR"/>
+        <result column="user_id" property="webankApplicationId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    floor_id, floor_num, floor_good, floor_text, status, time,
+    post_id, user_id
+  </sql>
+    <select id="selectByFloorId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from floor
+        where floor_id = #{floor_id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByFloorId" parameterType="java.lang.String">
+    delete from floor
+    where floor_id = #{floor_id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.forum.entity.Floor">
+        insert into floor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="floor_id != null">
+                floor_id,
+            </if>
+            <if test="floor_num != null">
+                floor_num,
+            </if>
+            <if test="floor_good != null">
+                floor_good,
+            </if>
+            <if test="floor_text != null">
+                floor_text,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="post_id != null">
+                post_id,
+            </if>
+            <if test="user_id != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="floor_id != null">
+                #{floor_id,jdbcType=VARCHAR},
+            </if>
+            <if test="floor_num != null">
+                #{floor_num,jdbcType=INTEGER},
+            </if>
+            <if test="floor_good != null">
+                #{floor_good,jdbcType=INTEGER},
+            </if>
+            <if test="floor_text != null">
+                #{floor_text,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMEST},
+            </if>
+            <if test="post_id != null">
+                #{post_id,jdbcType=VARCHAR},
+            </if>
+            <if test="user_id != null">
+                #{user_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByFloorId" parameterType="com.forum.entity.Floor">
+    update floor
+    set floor_id = #{floor_id,jdbcType=VARCHAR},
+      floor_num = #{floor_num,jdbcType=INTEGER},
+      floor_good = #{floor_good,jdbcType=INTEGER},
+      floor_text = #{floor_text,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMEST},
+      post_id = #{post_id,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=VARCHAR},
+    where floor_id = #{floor_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

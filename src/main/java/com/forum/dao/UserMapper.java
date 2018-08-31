@@ -1,4 +1,4 @@
 package com.forum.dao;
 
-public class PostDao {
+public class UserMapper {
 }

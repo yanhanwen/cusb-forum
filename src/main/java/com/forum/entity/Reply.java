@@ -17,7 +17,7 @@ public class Reply {
     }
 
     public void setReply_id(String reply_id) {
-        this.reply_id = reply_id;
+        this.reply_id = reply_id == null ? null : reply_id.trim();
     }
 
     public Timestamp getTime() {

@@ -12,7 +12,7 @@ public class History {
     }
 
     public void setIp(String ip) {
-        this.ip = ip;
+        this.ip = ip == null ? null : ip.trim();
     }
 
     public Timestamp getTime() {

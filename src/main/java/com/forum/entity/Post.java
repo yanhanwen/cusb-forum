@@ -17,7 +17,7 @@ public class Post {
     }
 
     public void setPost_id(String post_id) {
-        this.post_id = post_id;
+        this.post_id = post_id == null ? null : post_id.trim();
     }
 
     public String getPost_name() {
