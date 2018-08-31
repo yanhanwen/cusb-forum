@@ -5,13 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * about this class
- *
- * @PackageName: com.guazi.finance.utils
- * @Author: shilaiquan@guazi.com
- * @CreateDate: 2018/5/23 上午9:09
- **/
 public class StringUtil {
 
     static Logger logger = LoggerFactory.getLogger(StringUtil.class);
