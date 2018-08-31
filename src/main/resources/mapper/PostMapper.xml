@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.dao.PostMapper">
+    <resultMap id="BaseResultMap" type="com.forum.entity.Post">
+        <id column="post_id" property="post_id" jdbcType="VARCHAR"/>
+        <result column="post_name" property="post_name" jdbcType="VARCHAR"/>
+        <result column="create_date" property="create_date" jdbcType="TIMESTAMP"/>
+        <result column="visite_num" property="visite_num" jdbcType="INTEGER"/>
+        <result column="reply_num" property="reply_num" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="forum_id" property="forum_id" jdbcType="VARCHAR"/>
+        <result column="user_id" property="user_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    post_id, post_name, create_date, visite_num, reply_num, status,
+    forum_id, user_id
+  </sql>
+    <select id="selectByPostId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from post
+        where post_id = #{post_id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPostId" parameterType="java.lang.String">
+    delete from post
+    where post_id = #{post_id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.forum.entity.Post">
+        insert into post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="post_id != null">
+                post_id,
+            </if>
+            <if test="post_name != null">
+                post_name,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="visite_num != null">
+                visite_num,
+            </if>
+            <if test="reply_num != null">
+                reply_num,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="forum_id != null">
+                forum_id,
+            </if>
+            <if test="user_id != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="post_id != null">
+                #{post_id,jdbcType=VARCHAR},
+            </if>
+            <if test="post_name != null">
+                #{post_name,jdbcType=VARCHAR},
+            </if>
+            <if test="create_date != null">
+                #{create_date,jdbcType=TIMESTAMP},
+            </if>
+            <if test="visite_num != null">
+                #{visite_num,jdbcType=INTEGER},
+            </if>
+            <if test="reply_num != null">
+                #{reply_num,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="forum_id != null">
+                #{forum_id,jdbcType=VARCHAR},
+            </if>
+            <if test="user_id != null">
+                #{user_id,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPostId" parameterType="com.forum.entity.Post">
+    update post
+    set post_id = #{post_id,jdbcType=VARCHAR},
+      post_name = #{post_name,jdbcType=VARCHAR},
+      create_date = #{create_date,jdbcType=TIMESTAMP},
+      visite_num = #{visite_num,jdbcType=INTEGER},
+      reply_num = #{reply_num,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      forum_id = #{forum_id,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=VARCHAR}
+    where post_id = #{post_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

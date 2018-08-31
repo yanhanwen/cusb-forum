@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.forum.entity.User">
+        <id column="user_id" property="user_id" jdbcType="VARCHAR"/>
+        <result column="user_name" property="user_name" jdbcType="VARCHAR"/>
+        <result column="user_pwd" property="user_pwd" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="user_add" property="user_add" jdbcType="VARCHAR"/>
+        <result column="user_mail" property="user_mail" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    user_id, user_name, user_pwd, sex, age, user_add,
+    user_mail, phone ,level ,status
+  </sql>
+    <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_id = #{user_id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByUserId" parameterType="java.lang.String">
+    delete from user
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.forum.entity.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id != null">
+                user_id,
+            </if>
+            <if test="user_name != null">
+                user_name,
+            </if>
+            <if test="user_pwd != null">
+                user_pwd,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="user_add != null">
+                user_add,
+            </if>
+            <if test="user_mail != null">
+                user_mail,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="user_id != null">
+                #{user_id,jdbcType=VARCHAR},
+            </if>
+            <if test="user_name != null">
+                #{user_name,jdbcType=VARCHAR},
+            </if>
+            <if test="user_pwd != null">
+                #{user_pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="user_add != null">
+                #{user_add,jdbcType=VARCHAR},
+            </if>
+            <if test="user_mail != null">
+                #{user_mail,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByUserId" parameterType="com.forum.entity.User">
+    update user
+    set user_id = #{user_id,jdbcType=VARCHAR},
+      user_name = #{user_name,jdbcType=VARCHAR},
+      user_pwd = #{user_pwd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      user_add = #{user_add,jdbcType=VARCHAR},
+      user_mail = #{user_mail,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR}
+      level = #{level,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

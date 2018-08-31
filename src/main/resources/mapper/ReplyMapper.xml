@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forum.dao.ReplyMapper">
+    <resultMap id="BaseResultMap" type="com.forum.entity.Reply">
+        <id column="reply_id" property="reply_id" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="reply_text" property="reply_text" jdbcType="VARCHAR"/>
+        <result column="reply_goot" property="reply_goot" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="floor_id" property="floor_id" jdbcType="VARCHAR"/>
+        <result column="user_id" property="user_id" jdbcType="VARCHAR"/>
+        <result column="user_id_replieduser" property="user_id_replieduser" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    reply_id, time, reply_text, reply_goot, status, floor_id,
+    user_id, user_id_replieduser
+  </sql>
+    <select id="selectByReplyId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from reply
+        where reply_id = #{reply_id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByReplyId" parameterType="java.lang.String">
+    delete from reply
+    where reply_id = #{reply_id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.forum.entity.Reply">
+        insert into reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reply_id != null">
+                reply_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="reply_text != null">
+                reply_text,
+            </if>
+            <if test="reply_goot != null">
+                reply_goot,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="floor_id != null">
+                floor_id,
+            </if>
+            <if test="user_id != null">
+                user_id,
+            </if>
+            <if test="user_id_replieduser != null">
+                user_id_replieduser,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reply_id != null">
+                #{reply_id,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reply_text != null">
+                #{reply_text,jdbcType=VARCHAR},
+            </if>
+            <if test="reply_goot != null">
+                #{reply_goot,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="floor_id != null">
+                #{floor_id,jdbcType=VARCHAR},
+            </if>
+            <if test="user_id != null">
+                #{user_id,jdbcType=VARCHAR},
+            </if>
+            <if test="user_id_replieduser != null">
+                #{user_id_replieduser,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByReplyId" parameterType="com.forum.entity.Reply">
+    update reply
+    set reply_id = #{reply_id,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      reply_text = #{reply_text,jdbcType=VARCHAR},
+      reply_goot = #{reply_goot,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      floor_id = #{floor_id,jdbcType=VARCHAR},
+      user_id = #{user_id,jdbcType=VARCHAR},
+      user_id_replieduser = #{user_id_replieduser,jdbcType=VARCHAR}
+    where reply_id = #{reply_id,jdbcType=VARCHAR}
+  </update>
+</mapper>
