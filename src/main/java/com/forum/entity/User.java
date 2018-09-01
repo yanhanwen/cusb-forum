@@ -1,71 +1,84 @@
 package com.forum.entity;
 
-public class User {
-    private String user_id;//用户ID
-    private String user_name;//用户名
-    private String user_pwd;//用户密码
-    private int sex;//用户性别
-    private int age;//用户年龄
-    private String user_add;//用户住址
-    private String user_mail;//用户邮箱
-    private String phone;//用户手机号
-    private int level;//用户权限
-    private int status;//用户状态
+import java.io.Serializable;
 
-    public String getUser_id() {
-        return user_id;
+public class User implements Serializable {
+    private String userId;
+
+    private String userName;
+
+    private String userPwd;
+
+    private Integer sex;
+
+    private Integer age;
+
+    private String userAdd;
+
+    private String userMail;
+
+    private String phone;
+
+    private Integer level;
+
+    private Integer status;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id == null ? null : user_id.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getUser_pwd() {
-        return user_pwd;
+    public String getUserPwd() {
+        return userPwd;
     }
 
-    public void setUser_pwd(String user_pwd) {
-        this.user_pwd = user_pwd;
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd == null ? null : userPwd.trim();
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public String getUser_add() {
-        return user_add;
+    public String getUserAdd() {
+        return userAdd;
     }
 
-    public void setUser_add(String user_add) {
-        this.user_add = user_add;
+    public void setUserAdd(String userAdd) {
+        this.userAdd = userAdd == null ? null : userAdd.trim();
     }
 
-    public String getUser_mail() {
-        return user_mail;
+    public String getUserMail() {
+        return userMail;
     }
 
-    public void setUser_mail(String user_mail) {
-        this.user_mail = user_mail;
+    public void setUserMail(String userMail) {
+        this.userMail = userMail == null ? null : userMail.trim();
     }
 
     public String getPhone() {
@@ -73,38 +86,43 @@ public class User {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone == null ? null : phone.trim();
     }
 
-    public int getLevel() {
+    public Integer getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Integer level) {
         this.level = level;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", user_name='" + user_name + '\'' +
-                ", user_pwd='" + user_pwd + '\'' +
-                ", sex=" + sex +
-                ", age=" + age +
-                ", user_add='" + user_add + '\'' +
-                ", user_mail='" + user_mail + '\'' +
-                ", phone='" + phone + '\'' +
-                ", level=" + level +
-                ", status=" + status +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", userId=").append(userId);
+        sb.append(", userName=").append(userName);
+        sb.append(", userPwd=").append(userPwd);
+        sb.append(", sex=").append(sex);
+        sb.append(", age=").append(age);
+        sb.append(", userAdd=").append(userAdd);
+        sb.append(", userMail=").append(userMail);
+        sb.append(", phone=").append(phone);
+        sb.append(", level=").append(level);
+        sb.append(", status=").append(status);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

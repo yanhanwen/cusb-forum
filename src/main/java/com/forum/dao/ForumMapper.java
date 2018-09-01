@@ -1,13 +1,16 @@
 package com.forum.dao;
 
 import com.forum.entity.Forum;
+import java.util.List;
 
 public interface ForumMapper {
-    Forum selectByForumId(String forum_id);
-
-    int deleteByForumId(String forum_id);
+    int deleteByPrimaryKey(String forumId);
 
     int insert(Forum record);
 
-    int updateByForumId(String forum_id);
+    Forum selectByPrimaryKey(String forumId);
+
+    List<Forum> selectAll();
+
+    int updateByPrimaryKey(Forum record);
 }

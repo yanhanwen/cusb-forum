@@ -1,13 +1,16 @@
 package com.forum.dao;
 
 import com.forum.entity.History;
+import java.util.List;
 
 public interface HistoryMapper {
-    History selectByIp(String ip);
-
-    int deleteByIp(String ip);
+    int deleteByPrimaryKey(String ip);
 
     int insert(History record);
 
-    int updateByIp(String ip);
+    History selectByPrimaryKey(String ip);
+
+    List<History> selectAll();
+
+    int updateByPrimaryKey(History record);
 }

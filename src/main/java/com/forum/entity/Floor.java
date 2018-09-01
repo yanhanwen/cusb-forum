@@ -1,92 +1,107 @@
 package com.forum.entity;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Floor {
-    private String floor_id;//楼层标识
-    private int floor_num;//楼层数
-    private int floor_good;//楼层赞数
-    private String floor_text;//楼层内容
-    private int status;//楼层状态
-    private Timestamp time;//时间
-    private String post_id;
-    private String user_id;
+public class Floor implements Serializable {
+    private String floorId;
 
-    public String getFloor_id() {
-        return floor_id;
+    private Integer floorNum;
+
+    private Integer floorGood;
+
+    private String floorText;
+
+    private Integer status;
+
+    private Date time;
+
+    private String postId;
+
+    private String userId;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getFloorId() {
+        return floorId;
     }
 
-    public void setFloor_id(String floor_id) {
-        this.floor_id = floor_id == null ? null : floor_id.trim();
+    public void setFloorId(String floorId) {
+        this.floorId = floorId == null ? null : floorId.trim();
     }
 
-    public int getFloor_num() {
-        return floor_num;
+    public Integer getFloorNum() {
+        return floorNum;
     }
 
-    public void setFloor_num(int floor_num) {
-        this.floor_num = floor_num;
+    public void setFloorNum(Integer floorNum) {
+        this.floorNum = floorNum;
     }
 
-    public int getFloor_good() {
-        return floor_good;
+    public Integer getFloorGood() {
+        return floorGood;
     }
 
-    public void setFloor_good(int floor_good) {
-        this.floor_good = floor_good;
+    public void setFloorGood(Integer floorGood) {
+        this.floorGood = floorGood;
     }
 
-    public String getFloor_text() {
-        return floor_text;
+    public String getFloorText() {
+        return floorText;
     }
 
-    public void setFloor_text(String floor_text) {
-        this.floor_text = floor_text;
+    public void setFloorText(String floorText) {
+        this.floorText = floorText == null ? null : floorText.trim();
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    public String getPost_id() {
-        return post_id;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setPost_id(String post_id) {
-        this.post_id = post_id;
+    public void setPostId(String postId) {
+        this.postId = postId == null ? null : postId.trim();
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     @Override
     public String toString() {
-        return "Floor{" +
-                "floor_id='" + floor_id + '\'' +
-                ", floor_num=" + floor_num +
-                ", floor_good=" + floor_good +
-                ", floor_text='" + floor_text + '\'' +
-                ", status=" + status +
-                ", time=" + time +
-                ", post_id='" + post_id + '\'' +
-                ", user_id='" + user_id + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", floorId=").append(floorId);
+        sb.append(", floorNum=").append(floorNum);
+        sb.append(", floorGood=").append(floorGood);
+        sb.append(", floorText=").append(floorText);
+        sb.append(", status=").append(status);
+        sb.append(", time=").append(time);
+        sb.append(", postId=").append(postId);
+        sb.append(", userId=").append(userId);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

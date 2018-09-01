@@ -1,13 +1,16 @@
 package com.forum.dao;
 
 import com.forum.entity.Floor;
+import java.util.List;
 
 public interface FloorMapper {
-    Floor selectByFloorId(String floor_id);
-
-    int deleteByFloorId(String floor_id);
+    int deleteByPrimaryKey(String floorId);
 
     int insert(Floor record);
 
-    int updateByFloorId(String floor_id);
+    Floor selectByPrimaryKey(String floorId);
+
+    List<Floor> selectAll();
+
+    int updateByPrimaryKey(Floor record);
 }

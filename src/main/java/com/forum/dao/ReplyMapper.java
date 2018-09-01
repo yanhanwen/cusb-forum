@@ -1,13 +1,16 @@
 package com.forum.dao;
 
 import com.forum.entity.Reply;
+import java.util.List;
 
 public interface ReplyMapper {
-    Reply selectByReplyId(String reply_id);
-
-    int deleteByReplyId(String reply_id);
+    int deleteByPrimaryKey(String replyId);
 
     int insert(Reply record);
 
-    int updateByReplyId(String reply_id);
+    Reply selectByPrimaryKey(String replyId);
+
+    List<Reply> selectAll();
+
+    int updateByPrimaryKey(Reply record);
 }

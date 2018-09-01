@@ -1,92 +1,107 @@
 package com.forum.entity;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Post {
-    private String post_id;//帖子ID
-    private String post_name;//帖子名称
-    private Timestamp create_date;//发表日期
-    private int visite_num;//访问总数
-    private int reply_num;//回复总数
-    private int status;//状态
-    private String forum_id;
-    private String user_id;
+public class Post implements Serializable {
+    private String postId;
 
-    public String getPost_id() {
-        return post_id;
+    private String postName;
+
+    private Date createDate;
+
+    private Integer visiteNum;
+
+    private Integer replyNum;
+
+    private Integer status;
+
+    private String forumId;
+
+    private String userId;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getPostId() {
+        return postId;
     }
 
-    public void setPost_id(String post_id) {
-        this.post_id = post_id == null ? null : post_id.trim();
+    public void setPostId(String postId) {
+        this.postId = postId == null ? null : postId.trim();
     }
 
-    public String getPost_name() {
-        return post_name;
+    public String getPostName() {
+        return postName;
     }
 
-    public void setPost_name(String post_name) {
-        this.post_name = post_name;
+    public void setPostName(String postName) {
+        this.postName = postName == null ? null : postName.trim();
     }
 
-    public Timestamp getCreate_date() {
-        return create_date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Timestamp create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public int getVisite_num() {
-        return visite_num;
+    public Integer getVisiteNum() {
+        return visiteNum;
     }
 
-    public void setVisite_num(int visite_num) {
-        this.visite_num = visite_num;
+    public void setVisiteNum(Integer visiteNum) {
+        this.visiteNum = visiteNum;
     }
 
-    public int getReply_num() {
-        return reply_num;
+    public Integer getReplyNum() {
+        return replyNum;
     }
 
-    public void setReply_num(int reply_num) {
-        this.reply_num = reply_num;
+    public void setReplyNum(Integer replyNum) {
+        this.replyNum = replyNum;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public String getForum_id() {
-        return forum_id;
+    public String getForumId() {
+        return forumId;
     }
 
-    public void setForum_id(String forum_id) {
-        this.forum_id = forum_id;
+    public void setForumId(String forumId) {
+        this.forumId = forumId == null ? null : forumId.trim();
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     @Override
     public String toString() {
-        return "Post{" +
-                "post_id='" + post_id + '\'' +
-                ", post_name='" + post_name + '\'' +
-                ", create_date=" + create_date +
-                ", visite_num=" + visite_num +
-                ", reply_num=" + reply_num +
-                ", status=" + status +
-                ", forum_id='" + forum_id + '\'' +
-                ", user_id='" + user_id + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", postId=").append(postId);
+        sb.append(", postName=").append(postName);
+        sb.append(", createDate=").append(createDate);
+        sb.append(", visiteNum=").append(visiteNum);
+        sb.append(", replyNum=").append(replyNum);
+        sb.append(", status=").append(status);
+        sb.append(", forumId=").append(forumId);
+        sb.append(", userId=").append(userId);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

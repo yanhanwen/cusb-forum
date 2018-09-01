@@ -1,13 +1,16 @@
 package com.forum.dao;
 
 import com.forum.entity.User;
+import java.util.List;
 
 public interface UserMapper {
-    User selectByUserId(String user_id);
-
-    int deleteByUserId(String user_id);
+    int deleteByPrimaryKey(String userId);
 
     int insert(User record);
 
-    int updateByUserId(String user_id);
+    User selectByPrimaryKey(String userId);
+
+    List<User> selectAll();
+
+    int updateByPrimaryKey(User record);
 }

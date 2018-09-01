@@ -1,92 +1,107 @@
 package com.forum.entity;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Reply {
-    private String reply_id;//回复唯一标识
-    private Timestamp time;//时间
-    private String reply_text;//内容
-    private int reply_goot;//赞数
-    private int status;//状态
-    private String floor_id;
-    private String user_id;
-    private String user_id_replieduser;
+public class Reply implements Serializable {
+    private String replyId;
 
-    public String getReply_id() {
-        return reply_id;
+    private Date time;
+
+    private String replyText;
+
+    private Integer replyGoot;
+
+    private Integer status;
+
+    private String floorId;
+
+    private String userId;
+
+    private String userIdReplied;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getReplyId() {
+        return replyId;
     }
 
-    public void setReply_id(String reply_id) {
-        this.reply_id = reply_id == null ? null : reply_id.trim();
+    public void setReplyId(String replyId) {
+        this.replyId = replyId == null ? null : replyId.trim();
     }
 
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    public String getReply_text() {
-        return reply_text;
+    public String getReplyText() {
+        return replyText;
     }
 
-    public void setReply_text(String reply_text) {
-        this.reply_text = reply_text;
+    public void setReplyText(String replyText) {
+        this.replyText = replyText == null ? null : replyText.trim();
     }
 
-    public int getReply_goot() {
-        return reply_goot;
+    public Integer getReplyGoot() {
+        return replyGoot;
     }
 
-    public void setReply_goot(int reply_goot) {
-        this.reply_goot = reply_goot;
+    public void setReplyGoot(Integer replyGoot) {
+        this.replyGoot = replyGoot;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public String getFloor_id() {
-        return floor_id;
+    public String getFloorId() {
+        return floorId;
     }
 
-    public void setFloor_id(String floor_id) {
-        this.floor_id = floor_id;
+    public void setFloorId(String floorId) {
+        this.floorId = floorId == null ? null : floorId.trim();
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getUser_id_replieduser() {
-        return user_id_replieduser;
+    public String getUserIdReplied() {
+        return userIdReplied;
     }
 
-    public void setUser_id_replieduser(String user_id_replieduser) {
-        this.user_id_replieduser = user_id_replieduser;
+    public void setUserIdReplied(String userIdReplied) {
+        this.userIdReplied = userIdReplied == null ? null : userIdReplied.trim();
     }
 
     @Override
     public String toString() {
-        return "Reply{" +
-                "reply_id='" + reply_id + '\'' +
-                ", time=" + time +
-                ", reply_text='" + reply_text + '\'' +
-                ", reply_goot=" + reply_goot +
-                ", status=" + status +
-                ", floor_id='" + floor_id + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", user_id_replieduser='" + user_id_replieduser + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", replyId=").append(replyId);
+        sb.append(", time=").append(time);
+        sb.append(", replyText=").append(replyText);
+        sb.append(", replyGoot=").append(replyGoot);
+        sb.append(", status=").append(status);
+        sb.append(", floorId=").append(floorId);
+        sb.append(", userId=").append(userId);
+        sb.append(", userIdReplied=").append(userIdReplied);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

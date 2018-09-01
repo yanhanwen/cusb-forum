@@ -1,13 +1,16 @@
 package com.forum.dao;
 
 import com.forum.entity.Post;
+import java.util.List;
 
 public interface PostMapper {
-    Post selectByPostId(String post_id);
-
-    int deleteByPostId(String post_id);
+    int deleteByPrimaryKey(String postId);
 
     int insert(Post record);
 
-    int updateByPostId(String post_id);
+    Post selectByPrimaryKey(String postId);
+
+    List<Post> selectAll();
+
+    int updateByPrimaryKey(Post record);
 }

@@ -1,11 +1,16 @@
 package com.forum.entity;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.util.Date;
 
-public class History {
-    private String ip;//访问IP
-    private Timestamp time;//时间戳
-    private String user_id;//用户ID外键
+public class History implements Serializable {
+    private String ip;
+
+    private Date time;
+
+    private String userId;
+
+    private static final long serialVersionUID = 1L;
 
     public String getIp() {
         return ip;
@@ -15,28 +20,33 @@ public class History {
         this.ip = ip == null ? null : ip.trim();
     }
 
-    public Timestamp getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     @Override
     public String toString() {
-        return "History{" +
-                "ip='" + ip + '\'' +
-                ", time=" + time +
-                ", user_id='" + user_id + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", ip=").append(ip);
+        sb.append(", time=").append(time);
+        sb.append(", userId=").append(userId);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
