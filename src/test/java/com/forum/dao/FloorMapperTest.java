@@ -35,6 +35,7 @@ public class FloorMapperTest {
     @Test
     @Rollback
     public void insert() {
+        Floor f = new Floor();
     }
 
     @Test
