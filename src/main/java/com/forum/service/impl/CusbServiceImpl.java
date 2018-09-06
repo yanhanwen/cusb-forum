@@ -42,7 +42,7 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public void signin() {
-
+    public void regist() {
+        userDao.insert();
     }
 }
