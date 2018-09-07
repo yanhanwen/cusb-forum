@@ -42,7 +42,8 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public void regist() {
-        userDao.insert();
+    public int regist(String userId,String userPwd){
+//        userDao.insert();
+        return -1;
     }
 }
