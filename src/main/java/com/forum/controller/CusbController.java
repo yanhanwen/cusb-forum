@@ -14,20 +14,10 @@ public class CusbController {
     @Autowired
     CusbService cusbService;
 
-    @GetMapping(value = "/login")
-    public String toUpload() {
-        return "login";
-    }
-
     @PostMapping("/login")
     public void login(@RequestParam String userId, @RequestParam String userPwd) {
         int result = cusbService.login(userId, userPwd);
         //todo,页面跳转逻辑，和返回信息
-    }
-
-    @GetMapping("/regist")
-    public String login(){
-        return "regist";
     }
 
     @PostMapping("/regist")

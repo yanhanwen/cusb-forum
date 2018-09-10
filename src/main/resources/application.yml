@@ -8,7 +8,6 @@ server:
 spring:
   thymeleaf:
     mode: LEGACYHTML5
-    suffix: .html
     prefix: classpath:/templates/
   http:
     multipart:
