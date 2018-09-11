@@ -1,7 +1,12 @@
 package com.forum.service.api;
 
+import com.forum.entity.User;
+
+import java.util.List;
+
 public interface CusbService {
     int login(String userName,String userPwd);
-    void logout();
-    int regist(String userId,String userPwd);
+    int logout(String userId);
+    int regist(User user);
+    List<User> getActiveUserList();
 }
