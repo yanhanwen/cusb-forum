@@ -28,7 +28,7 @@ public interface CusbService {
     /*
      **发文章
      */
-    int faArticle(String userId,String forumId,String postName);
+    int faPost(String userId,String forumId,String postName);
 
     /*
      **发回帖楼层

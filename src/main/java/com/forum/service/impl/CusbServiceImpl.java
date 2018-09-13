@@ -83,7 +83,7 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public int faArticle(String userId,String forumId,String postName){
+    public int faPost(String userId,String forumId,String postName){
         Post post = new Post();
         try{
             post.setCreateDate(new Date());
