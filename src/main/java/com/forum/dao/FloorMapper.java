@@ -13,4 +13,6 @@ public interface FloorMapper {
     List<Floor> selectAll();
 
     int updateByPrimaryKey(Floor record);
+
+    int getMaxFloorNum(String postId);
 }

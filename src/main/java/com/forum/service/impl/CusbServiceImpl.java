@@ -2,9 +2,11 @@ package com.forum.service.impl;
 
 import com.forum.common.ForumException;
 import com.forum.common.ForumResultCode;
+import com.forum.dao.FloorMapper;
+import com.forum.dao.PostMapper;
+import com.forum.dao.ReplyMapper;
 import com.forum.dao.UserMapper;
-import com.forum.entity.Forum;
-import com.forum.entity.User;
+import com.forum.entity.*;
 import com.forum.service.api.CusbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +14,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CusbServiceImpl implements CusbService {
     @Autowired
     UserMapper userDao;
+    @Autowired
+    PostMapper postDao;
+    @Autowired
+    FloorMapper floorDao;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -72,5 +80,47 @@ public class CusbServiceImpl implements CusbService {
         List<User> result;
         result = userDao.selectActive();
         return result;
+    }
+
+    @Override
+    public int faArticle(String userId,String forumId,String postName){
+        Post post = new Post();
+        try{
+            post.setCreateDate(new Date());
+            post.setForumId(forumId);
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            post.setPostId(uuid);
+            post.setPostName(postName);
+            post.setReplyNum(0);
+            post.setStatus(0);//0为非热帖
+            post.setUserId(userId);
+            post.setVisiteNum(0);
+        } catch (Exception e){
+            logger.error("param error of forumId:{}",forumId);
+            return -1;
+        }
+        postDao.insert(post);
+        return 0;
+    }
+
+    @Override
+    public int replyPost(String userId,String postId,String floorText){
+        Floor floor = new Floor();
+        try{
+            floor.setUserId(userId);
+            floor.setStatus(0);
+            floor.setTime(new Date());
+            floor.setPostId(postId);
+            floor.setFloorText(floorText);
+            floor.setFloorGood(0);
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            floor.setFloorNum(floorDao.getMaxFloorNum(postId) + 1);
+            floor.setFloorId(uuid);
+        } catch (Exception e) {
+            logger.error("param error of postId:{}",postId);
+            return -1;
+        }
+        floorDao.insert(floor);
+        return 0;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ForumApplication.class)
@@ -52,5 +53,11 @@ public class FloorMapperTest {
     @Test
     @Rollback
     public void updateByFloorId() {
+    }
+
+    @Test
+    public void uuidTest(){
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        System.out.println(uuid);
     }
 }
