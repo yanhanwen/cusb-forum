@@ -123,4 +123,30 @@ public class CusbServiceImpl implements CusbService {
         floorDao.insert(floor);
         return 0;
     }
+
+    @Override
+    public int changePost(String postId,String postName){
+        Post post = postDao.selectByPrimaryKey(postId);
+        if(post == null){
+            logger.error("not found floorId:{}",postId);
+            throw new ForumException(ForumResultCode.DB_STORE);
+        }
+        post.setPostName(postName);
+        postDao.updateByPrimaryKey(post);
+        return 0;
+    }
+
+    @Override
+    public int deletePost(String postId){
+        Post post = postDao.selectByPrimaryKey(postId);
+        if(post == null){
+            logger.error("not found floorId:{}",postId);
+            throw new ForumException(ForumResultCode.DB_STORE);
+        }
+        int t = postDao.deleteByPrimaryKey(postId);
+        if(t == 0){
+            return -1;
+        }
+        return 0;
+    }
 }

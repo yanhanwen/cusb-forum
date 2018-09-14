@@ -3,6 +3,7 @@ package com.forum.controller;
 import com.forum.common.ForumException;
 import com.forum.common.ForumResult;
 import com.forum.common.ForumResultCode;
+import com.forum.dao.UserMapper;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
 import org.slf4j.Logger;
@@ -21,6 +22,8 @@ import java.util.Map;
 public class CusbController {
     @Autowired
     CusbService cusbService;
+    @Autowired
+    UserMapper userDao;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -31,13 +34,16 @@ public class CusbController {
     }
 
     @PostMapping("/regist")
-    public void regist(@RequestParam String userId, @RequestParam String userPwd,@RequestParam String userName,
+    public int regist(@RequestParam String userId, @RequestParam String userPwd,@RequestParam String userName,
                        @RequestParam int sex,@RequestParam int age,@RequestParam String userAdd,
                        @RequestParam String userMail,@RequestParam String phone) {
         User user = new User();
         try{
             user.setLevel(0);//0为普通用户
             user.setStatus(1);//1为登陆状态
+            if(userDao.selectByPrimaryKey(userId) != null){
+                return -1;//重复
+            }
             user.setUserId(userId);
             user.setUserPwd(userPwd);
             user.setUserName(userName);
@@ -48,10 +54,10 @@ public class CusbController {
             user.setPhone(phone);
         } catch (Exception e) {
             logger.info("param has null userId:{}",userId);
-            throw new ForumException(ForumResultCode.PARAM_MISS);
+            return -2;//错误
         }
         int result = cusbService.regist(user);
-        //todo,页面跳转逻辑，和返回信息
+        return 0;
     }
 
     @PostMapping("/logout")

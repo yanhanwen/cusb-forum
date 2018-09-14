@@ -34,4 +34,14 @@ public interface CusbService {
      **发回帖楼层
      */
     int replyPost(String userId,String postId,String floorText);
+
+    /*
+     **修改帖子
+     */
+    int changePost(String postId,String postName);
+
+    /*
+     **删除自己发布的帖子
+     */
+    int deletePost(String postId);
 }
