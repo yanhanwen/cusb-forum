@@ -1,5 +1,6 @@
 package com.forum.service.api;
 
+import com.forum.entity.Post;
 import com.forum.entity.User;
 
 import java.util.List;
@@ -44,4 +45,19 @@ public interface CusbService {
      **删除自己发布的帖子
      */
     int deletePost(String postId);
+
+    /*
+     **查询自己发布的帖子
+     */
+    List<Post> queryPost(String userId);
+
+    /*
+     **按关键字查询帖子
+     */
+    List<Post> queryPostByKeyword(String keyword);
+
+    /*
+     **修改自己的资料
+     */
+    int modifyInfo(User user);
 }

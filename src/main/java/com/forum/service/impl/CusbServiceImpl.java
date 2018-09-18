@@ -152,4 +152,30 @@ public class CusbServiceImpl implements CusbService {
         }
         return 0;
     }
+
+    @Override
+    public List<Post> queryPost(String userId)
+    {
+        List<Post> result;
+        result = postDao.selectByUserId(userId);
+        return result;
+    }
+
+    @Override
+    public List<Post> queryPostByKeyword(String keyword)
+    {
+        StringBuffer buffer = new StringBuffer(keyword);
+        buffer.insert(0, "%");              //关键字前后添加%号
+        buffer.append("%");
+        List<Post> result;
+        result = postDao.selectByKeyword(buffer.toString());
+        return result;
+    }
+
+    @Override
+    public int modifyInfo(User user)
+    {
+        userDao.updateByPrimaryKey(user);
+        return 0;
+    }
 }
