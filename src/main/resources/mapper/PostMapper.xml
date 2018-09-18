@@ -47,4 +47,16 @@
     user_id
     from post
   </select>
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select post_id, post_name, create_date, visite_num, reply_num, `status`, topic, forum_id,
+    user_id
+    from post
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select post_id, post_name, create_date, visite_num, reply_num, `status`, topic, forum_id,
+    user_id
+    from post
+    where post_name = like #{keyword}
+  </select>
 </mapper>

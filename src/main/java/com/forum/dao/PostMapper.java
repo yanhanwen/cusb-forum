@@ -13,4 +13,8 @@ public interface PostMapper {
     List<Post> selectAll();
 
     int updateByPrimaryKey(Post record);
+
+    List<Post> selectByUserId(String userId);
+
+    List<Post> selectByKeyword(String keyword);
 }
