@@ -18,7 +18,7 @@ public interface CusbService {
     /*
      **注册
      */
-    int regist(User user);
+    void regist(User user);
 
     /*
      **获得登陆状态用户

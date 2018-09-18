@@ -7,6 +7,7 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="visite_num" jdbcType="INTEGER" property="visiteNum" />
     <result column="reply_num" jdbcType="INTEGER" property="replyNum" />
+    <result column="topic" jdbcType="VARCHAR" property="topic" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="forum_id" jdbcType="VARCHAR" property="forumId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
@@ -17,10 +18,10 @@
   </delete>
   <insert id="insert" parameterType="com.forum.entity.Post">
     insert into post (post_id, post_name, create_date, 
-      visite_num, reply_num, `status`, 
+      visite_num, reply_num, `status`, topic,
       forum_id, user_id)
     values (#{postId,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{visiteNum,jdbcType=INTEGER}, #{replyNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{visiteNum,jdbcType=INTEGER}, #{replyNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR}
       #{forumId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.forum.entity.Post">
@@ -30,18 +31,19 @@
       visite_num = #{visiteNum,jdbcType=INTEGER},
       reply_num = #{replyNum,jdbcType=INTEGER},
       `status` = #{status,jdbcType=INTEGER},
+      topic = #{topic,jdbcType=VARCHAR},
       forum_id = #{forumId,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR}
     where post_id = #{postId,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select post_id, post_name, create_date, visite_num, reply_num, `status`, forum_id, 
+    select post_id, post_name, create_date, visite_num, reply_num, `status`, topic, forum_id,
     user_id
     from post
     where post_id = #{postId,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select post_id, post_name, create_date, visite_num, reply_num, `status`, forum_id, 
+    select post_id, post_name, create_date, visite_num, reply_num, `status`, topic, forum_id,
     user_id
     from post
   </select>

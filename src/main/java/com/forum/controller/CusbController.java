@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,31 +34,42 @@ public class CusbController {
         //todo,页面跳转逻辑，和返回信息
     }
 
+    @ResponseBody
     @PostMapping("/regist")
-    public int regist(@RequestParam String userId, @RequestParam String userPwd,@RequestParam String userName,
-                       @RequestParam int sex,@RequestParam int age,@RequestParam String userAdd,
-                       @RequestParam String userMail,@RequestParam String phone) {
+    public String regist(@RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName,
+                         @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
+                         @RequestParam String userMail, @RequestParam String phone) {
         User user = new User();
         try{
             user.setLevel(0);//0为普通用户
             user.setStatus(1);//1为登陆状态
             if(userDao.selectByPrimaryKey(userId) != null){
-                return -1;//重复
+                return "id重复";//重复
             }
             user.setUserId(userId);
             user.setUserPwd(userPwd);
             user.setUserName(userName);
-            user.setSex(sex);
-            user.setAge(age);
+            Integer t = Integer.parseInt(age);
+            user.setAge(t);
+            if(t<0){
+                return "年龄错误";
+            }
+            if(sex != null && sex.equals("男")){
+                user.setSex(0);
+            } else if (sex != null && sex.equals("女")){
+                user.setSex(1);
+            } else {
+                throw new ForumException(ForumResultCode.PARAM_INVALID);
+            }
             user.setUserAdd(userAdd);
             user.setUserMail(userMail);
             user.setPhone(phone);
+            cusbService.regist(user);
         } catch (Exception e) {
             logger.info("param has null userId:{}",userId);
-            return -2;//错误
+            return "参数错误";//错误
         }
-        int result = cusbService.regist(user);
-        return 0;
+        return "成功";
     }
 
     @PostMapping("/logout")

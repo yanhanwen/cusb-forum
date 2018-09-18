@@ -66,13 +66,16 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public int regist(User user) {
-        int t = userDao.insert(user);
-        if(t == 1){
-            logger.info("regist succeed userId:{}",user.getUserId());
-            return 0;
+    public void regist(User user) {
+        try{
+            int t = userDao.insert(user);
+            if(t == 1) {
+                logger.info("regist succeed userId:{}", user.getUserId());
+            }
+        } catch (Exception e) {
+            logger.error("regist failed userId:{}", user.getUserId());
+            throw new ForumException(ForumResultCode.PARAM_INVALID);
         }
-        return -1;
     }
 
     @Override
