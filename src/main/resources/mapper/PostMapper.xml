@@ -21,7 +21,7 @@
       visite_num, reply_num, `status`, topic,
       forum_id, user_id)
     values (#{postId,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{visiteNum,jdbcType=INTEGER}, #{replyNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR}
+      #{visiteNum,jdbcType=INTEGER}, #{replyNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{topic,jdbcType=VARCHAR},
       #{forumId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.forum.entity.Post">
