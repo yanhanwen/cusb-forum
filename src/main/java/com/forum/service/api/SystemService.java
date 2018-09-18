@@ -1,6 +1,7 @@
 package com.forum.service.api;
 
 import com.forum.entity.Forum;
+import com.forum.entity.Post;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface SystemService {
     /*
      **主题显示
      */
+    List<Post> listPostOfTopic(String topic);
 }

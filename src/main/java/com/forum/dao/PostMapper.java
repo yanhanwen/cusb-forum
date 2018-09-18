@@ -17,4 +17,6 @@ public interface PostMapper {
     List<Post> selectByUserId(String userId);
 
     List<Post> selectByKeyword(String keyword);
+
+    List<Post> selectByTopic(String topic);
 }

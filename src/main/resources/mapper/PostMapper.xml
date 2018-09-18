@@ -59,4 +59,10 @@
     from post
     where post_name = like #{keyword}
   </select>
+  <select id="selectByTopic" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select post_id, post_name, create_date, visite_num, reply_num, `status`, topic, forum_id,
+    user_id
+    from post
+    where topic = #{topic,jdbcType=VARCHAR}
+  </select>
 </mapper>

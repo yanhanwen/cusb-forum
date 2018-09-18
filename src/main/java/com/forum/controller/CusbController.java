@@ -6,11 +6,14 @@ import com.forum.common.ForumResultCode;
 import com.forum.dao.UserMapper;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
+import com.forum.service.api.SystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -23,6 +26,8 @@ import java.util.Map;
 public class CusbController {
     @Autowired
     CusbService cusbService;
+    @Autowired
+    SystemService systemService;
     @Autowired
     UserMapper userDao;
 
@@ -80,6 +85,13 @@ public class CusbController {
     @GetMapping("/ActiveUserList")
     public List<User> getActiveUserList(){
         return cusbService.getActiveUserList();
+    }
+
+    @RequestMapping("/showforum")
+    public ModelAndView showForum(ModelAndView  model){
+        model.setViewName("/showforum");
+        model.addObject("forumlist",systemService.listForum());
+        return model;
     }
 
     @ExceptionHandler(ForumException.class)
