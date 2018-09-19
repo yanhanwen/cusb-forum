@@ -51,6 +51,7 @@ public class CusbController {
         return "login";
     }
 
+    @ResponseBody
     @RequestMapping("/regist")
     public String regist(@RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName,
                          @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
@@ -98,12 +99,6 @@ public class CusbController {
         return cusbService.getActiveUserList();
     }
 
-//    @RequestMapping("/showforum")
-//    public ModelAndView showForum(ModelAndView  model){
-//        model.setViewName("/showforum");
-//        model.addObject("forumlist",systemService.listForum());
-//        return model;
-//    }
 
     @ExceptionHandler(ForumException.class)
     @ResponseBody
