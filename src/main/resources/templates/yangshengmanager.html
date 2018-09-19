@@ -10,11 +10,11 @@
         <div th:each="name:${list}">
             <div th:text="${name}"></div>
             <form action="/cusb-forum/deletePost" method="post" enctype="multipart/form-data">
-                <input type="text" value="${name.postId}" style="display:none"/>
+                <input type="text" value="${name.postId}" style="display:none" name="postId"/>
                 <input type="submit" value="删除" name="deletePost">
             </form>
             <form action="/cusb-forum/setPostTop" method="post" enctype="multipart/form-data">
-                <input type="text" value="${name.postId}" style="display:none"/>
+                <input type="text" value="${name.postId}" style="display:none" name="postId"/>
                 <input type="submit" value="置顶/取消" name="setPostTop">
             </form>
         </div>

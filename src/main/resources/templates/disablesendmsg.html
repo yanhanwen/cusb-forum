@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>板块内禁言</title>
 </head>
 <body>
+
 <form action="/cusb-forum/disablesendmsg" method="post" enctype="multipart/form-data">
+
     用户ID:<input type="text" name="userId"/><br/>
     论坛ID:<input type="text" name="forumId"/><br/>
     <input type="submit" value="禁言" name="disablesendmsg">
