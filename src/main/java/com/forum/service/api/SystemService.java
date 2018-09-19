@@ -1,6 +1,7 @@
 package com.forum.service.api;
 
 import com.forum.entity.Forum;
+import com.forum.entity.Ip;
 import com.forum.entity.Post;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface SystemService {
      **显示帖子
      */
     List<Post> listPostOfForum(String forumId);
+
+    List<Ip> listIp();
 }

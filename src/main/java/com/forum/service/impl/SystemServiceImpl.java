@@ -1,8 +1,10 @@
 package com.forum.service.impl;
 
 import com.forum.dao.ForumMapper;
+import com.forum.dao.IpMapper;
 import com.forum.dao.PostMapper;
 import com.forum.entity.Forum;
+import com.forum.entity.Ip;
 import com.forum.entity.Post;
 import com.forum.service.api.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class SystemServiceImpl implements SystemService {
     ForumMapper forumDao;
     @Autowired
     PostMapper postDao;
+    @Autowired
+    IpMapper ipDao;
     @Override
     public List<Forum> listForum(){
         List<Forum> list = new ArrayList<>();
@@ -36,5 +40,12 @@ public class SystemServiceImpl implements SystemService {
         List<Post> list = new ArrayList<>();
         list = postDao.selectByForum(forumId);
         return list;
+    }
+    @Override
+    public List<Ip> listIp()
+    {
+        List<Ip> list = new ArrayList<>();
+        list = ipDao.selectAll();
+        return  list;
     }
 }

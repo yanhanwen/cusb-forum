@@ -4,6 +4,7 @@ import com.forum.ForumApplication;
 import com.forum.dao.IpMapper;
 import com.forum.dao.PostMapper;
 import com.forum.dao.UserMapper;
+import com.forum.entity.Ip;
 import com.forum.entity.Post;
 import com.forum.entity.User;
 import com.forum.service.api.SystemService;
@@ -58,7 +59,7 @@ public class CusbServiceImplTest
     public void insert()
     {
 
-        User user = new User();
+        /*User user = new User();
         user.setUserId("2");
         user.setUserName("test_user");
         user.setUserPwd("123456");
@@ -82,5 +83,12 @@ public class CusbServiceImplTest
         post.setForumId("1");
         post.setUserId("1");
         postDao.insert(post);
+*/
+        Ip ip=new Ip();
+        ip.setIpId("1");
+        ip.setIp("1243234124");
+        ip.setTime(new Timestamp(new Date().getTime()));
+        ip.setUserId("001");
+        ipDao.insert(ip);
     }
 }

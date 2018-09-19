@@ -1,8 +1,10 @@
 package com.forum.controller;
 
+import com.forum.dao.IpMapper;
 import com.forum.dao.PostMapper;
 import com.forum.entity.Forum;
 import com.forum.dao.UserMapper;
+import com.forum.entity.Ip;
 import com.forum.entity.Post;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
@@ -32,6 +34,8 @@ public class SystemController {
     PostMapper postDao;
     @Autowired
     UserMapper userDao;
+    @Autowired
+    IpMapper   ipDao;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -157,26 +161,26 @@ public class SystemController {
         return "enablesendmsg";
     }
 
-    @GetMapping(value = "/showfloor")
-    public String showFloor(Model map){
-        cusbService.replyPost(userId,String postId,String floorText);
-        return "showfloor";
-    }
+//    @GetMapping(value = "/showfloor")
+//    public String showFloor(Model map){
+//        cusbService.replyPost(userId,String postId,String floorText);
+//        return "showfloor";
+//    }
 
     @GetMapping(value = "/ipmanager")
     public String ipmanager(Model map) {
-        List<> list = systemService.listPostOfForum("t1");
-        List<Post> listtop = new ArrayList<>();
-        for(Post t:list){
-            if(t.getStatus()/100 == 2){
-                listtop.add(t);
-            }
-        }
-        for(Post t:listtop){
-            list.remove(t);
-        }
-        map.addAttribute("listtop",listtop);
+        List<Ip> list = systemService.listIp();
+//        List<Post> listtop = new ArrayList<>();
+//        for(Post t:list){
+//            if(t.getStatus()/100 == 2){
+//                listtop.add(t);
+//            }
+//        }
+//        for(Post t:listtop){
+//            list.remove(t);
+//        }
+//        map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
-        return "yangzhi";
+        return "ipmanager";
     }
 }
