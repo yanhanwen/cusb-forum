@@ -3,6 +3,9 @@ package com.forum.service.api;
 import com.forum.entity.Forum;
 
 public interface ManagerService {
+    /*
+     **提权
+     */
     void upLevel(String userId,int level);
 
     /*管理员增加分论坛*/

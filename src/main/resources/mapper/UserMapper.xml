@@ -57,4 +57,10 @@
     from user
     where status = 1;
   </select>
+  <select id="selectUserByStatus" resultMap="BaseResultMap">
+    select user_id, user_name, user_pwd, sex, age, user_add, user_mail, phone, `level`,
+    `status`
+    from user
+    where status = #{status,jdbcType=INTEGER};
+  </select>
 </mapper>

@@ -12,7 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +34,9 @@ public class CusbServiceImpl implements CusbService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
+//    ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//    HttpServletRequest request = requestAttributes.getRequest();
+//    HttpSession session = request.getSession();
     @Override
     public int login(String userId,String userPwd){
         logger.info("start to login scan,userId:{}",userId);
@@ -43,6 +51,7 @@ public class CusbServiceImpl implements CusbService {
                 return -2;
             }
             user.setStatus(1);//设置为登陆状态
+//            session.setAttribute("用户",user);
             userDao.updateByPrimaryKey(user);
             return 0;
         }
@@ -66,13 +75,16 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public int regist(User user) {
-        int t = userDao.insert(user);
-        if(t == 1){
-            logger.info("regist succeed userId:{}",user.getUserId());
-            return 0;
+    public void regist(User user) {
+        try{
+            int t = userDao.insert(user);
+            if(t == 1) {
+                logger.info("regist succeed userId:{}", user.getUserId());
+            }
+        } catch (Exception e) {
+            logger.error("regist failed userId:{}", user.getUserId());
+            throw new ForumException(ForumResultCode.PARAM_INVALID);
         }
-        return -1;
     }
 
     @Override
@@ -121,6 +133,58 @@ public class CusbServiceImpl implements CusbService {
             return -1;
         }
         floorDao.insert(floor);
+        return 0;
+    }
+
+    @Override
+    public int changePost(String postId,String postName){
+        Post post = postDao.selectByPrimaryKey(postId);
+        if(post == null){
+            logger.error("not found floorId:{}",postId);
+            throw new ForumException(ForumResultCode.DB_STORE);
+        }
+        post.setPostName(postName);
+        postDao.updateByPrimaryKey(post);
+        return 0;
+    }
+
+    @Override
+    public int deletePost(String postId){
+        Post post = postDao.selectByPrimaryKey(postId);
+        if(post == null){
+            logger.error("not found floorId:{}",postId);
+            throw new ForumException(ForumResultCode.DB_STORE);
+        }
+        int t = postDao.deleteByPrimaryKey(postId);
+        if(t == 0){
+            return -1;
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Post> queryPost(String userId)
+    {
+        List<Post> result;
+        result = postDao.selectByUserId(userId);
+        return result;
+    }
+
+    @Override
+    public List<Post> queryPostByKeyword(String keyword)
+    {
+        StringBuffer buffer = new StringBuffer(keyword);
+        buffer.insert(0, "%");              //关键字前后添加%号
+        buffer.append("%");
+        List<Post> result;
+        result = postDao.selectByKeyword(buffer.toString());
+        return result;
+    }
+
+    @Override
+    public int modifyInfo(User user)
+    {
+        userDao.updateByPrimaryKey(user);
         return 0;
     }
 }
