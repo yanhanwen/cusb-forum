@@ -4,7 +4,6 @@ import com.forum.common.ForumException;
 import com.forum.common.ForumResultCode;
 import com.forum.dao.FloorMapper;
 import com.forum.dao.PostMapper;
-import com.forum.dao.ReplyMapper;
 import com.forum.dao.UserMapper;
 import com.forum.entity.*;
 import com.forum.service.api.CusbService;
@@ -12,11 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,9 +28,7 @@ public class CusbServiceImpl implements CusbService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-//    ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-//    HttpServletRequest request = requestAttributes.getRequest();
-//    HttpSession session = request.getSession();
+    private Session session;
     @Override
     public int login(String userId,String userPwd){
         logger.info("start to login scan,userId:{}",userId);
@@ -50,8 +42,8 @@ public class CusbServiceImpl implements CusbService {
                 logger.error("password wrong,userId:{}",userId);
                 return -2;
             }
-            user.setStatus(1);//设置为登陆状态
-//            session.setAttribute("用户",user);
+            user.setStatus(211);//设置为登陆状态
+
             userDao.updateByPrimaryKey(user);
             return 0;
         }
@@ -89,9 +81,14 @@ public class CusbServiceImpl implements CusbService {
 
     @Override
     public List<User> getActiveUserList() {
-        List<User> result;
-        result = userDao.selectActive();
-        return result;
+        List<User> result = userDao.selectAll();
+        List<User> ans = new ArrayList<>();
+        for(User user:result){
+            if(user.getStatus()/100 == 2){
+                ans.add(user);
+            }
+        }
+        return ans;
     }
 
     @Override
@@ -105,7 +102,7 @@ public class CusbServiceImpl implements CusbService {
             post.setPostId(uuid);
             post.setPostName(postName);
             post.setReplyNum(0);
-            post.setStatus(0);//0为非热帖
+            post.setStatus(211);//2为非热帖
             post.setUserId(userId);
             post.setVisiteNum(0);
             post.setTopic("养猪");

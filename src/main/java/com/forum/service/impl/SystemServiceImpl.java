@@ -1,7 +1,9 @@
 package com.forum.service.impl;
 
+import com.forum.dao.FloorMapper;
 import com.forum.dao.ForumMapper;
 import com.forum.dao.PostMapper;
+import com.forum.entity.Floor;
 import com.forum.entity.Forum;
 import com.forum.entity.Post;
 import com.forum.service.api.SystemService;
@@ -17,6 +19,9 @@ public class SystemServiceImpl implements SystemService {
     ForumMapper forumDao;
     @Autowired
     PostMapper postDao;
+    @Autowired
+    FloorMapper floorDao;
+
     @Override
     public List<Forum> listForum(){
         List<Forum> list = new ArrayList<>();
@@ -35,6 +40,13 @@ public class SystemServiceImpl implements SystemService {
     public List<Post> listPostOfForum(String forumId){
         List<Post> list = new ArrayList<>();
         list = postDao.selectByForum(forumId);
+        return list;
+    }
+
+    @Override
+    public List<Floor> listFloor(String postId){
+        List<Floor> list = new ArrayList<>();
+        list = floorDao.selectAll();
         return list;
     }
 }

@@ -1,30 +1,32 @@
 package com.forum.dao;
 
 import com.forum.ForumApplication;
-import com.forum.entity.Floor;
+import com.forum.entity.Ip;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ForumApplication.class)
 @Transactional
-public class FloorMapperTest {
+public class IpMapperTest {
 
     @Autowired
-    FloorMapper dao;
+    IpMapper dao;
 
     @Test
     public void selectByFloorId() {
-        Floor f = dao.selectByPrimaryKey("1");
+        Ip f = dao.selectByPrimaryKey("1");
         Assert.assertNotNull(f);
     }
 
@@ -36,22 +38,20 @@ public class FloorMapperTest {
     }
 
     @Test
-    @Rollback
+//    @Rollback
+    @Commit
     public void insert() {
-        Floor f = new Floor();
-        f.setFloorId("1");
-        f.setFloorGood(10);
-        f.setFloorNum(1);
-        f.setFloorText("hello");
-        f.setPostId("");
-        f.setTime(new Date());
-        f.setStatus(1);
-        f.setUserId("");
+        Ip f = new Ip();
+        f.setIpId("1");
+        f.setUserId("001");
+        f.setIp("191.168.49.140");
+        f.setTime(new Timestamp(new Date().getTime()));
+        dao.insert(f);
     }
 
     @Test
+    @Rollback
     public void updateByFloorId() {
-        System.out.println(2%200);
     }
 
     @Test

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>回帖</title>
+</head>
+<body>
+<tr>
+    <td>
+        <div th:each="name:${list}">
+            楼层号：<pre th:text="${name.floorNum}"></pre>
+            赞数：<pre th:text="${name.floorGood}"></pre>
+            内容：<pre th:text="${name.floorText}"></pre>
+            时间：<pre th:text="${name.time}"></pre>
+            <form action="/cusb-forum/replyPost" method="get">
+                <input type="hidden" value="${name.postId}">
+                <input type="submit" value="进入帖子" name="enter">
+            </form>
+        </div>
+    </td>
+</tr>
+</body>
+</html>

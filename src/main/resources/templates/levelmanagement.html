@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用戶管理 管理员</title>
+</head>
+<body>
+<tr>
+    <td>
+        所有用戶：
+        <div th:each="name:${list}">
+            <div th:text="${name}"></div>
+            <form action="/cusb-forum/deleteUser" method="post" enctype="multipart/form-data">
+                <input type="text" th:value="${name.userId}" style="display:none" name="userId"/>
+                <input type="submit" value="升级权限" name="deleteUser">
+            </form>
+            <!--<form action="/cusb-forum/setPostTop" method="post" enctype="multipart/form-data">
+                <input type="text" value="${name.postId}" style="display:none" name="postId"/>
+                <input type="submit" value="置顶/取消" name="setPostTop">
+            </form>-->
+        </div>
+    </td>
+</tr>
+</body>
+</html>
