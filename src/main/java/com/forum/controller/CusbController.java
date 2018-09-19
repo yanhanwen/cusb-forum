@@ -228,6 +228,15 @@ public class CusbController {
         return "new-post";
     }
 
+    @GetMapping(value = "post")
+    public String posted(Model map)
+    {
+        List<Post> list;
+        list = cusbService.queryPost("1");
+        map.addAttribute("list", list);
+        return "post";
+    }
+
     @RequestMapping("/newPost")
     public String newPost(@RequestParam String title, @RequestParam String content, @RequestParam String forum)
     {
