@@ -43,7 +43,7 @@ public class CusbServiceImpl implements CusbService {
                 return -2;
             }
             user.setStatus(211);//设置为登陆状态
-            session.a("用户",user);
+
             userDao.updateByPrimaryKey(user);
             return 0;
         }
