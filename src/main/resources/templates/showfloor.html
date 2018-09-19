@@ -12,7 +12,7 @@
             赞数：<pre th:text="${name.floorGood}"></pre>
             内容：<pre th:text="${name.floorText}"></pre>
             时间：<pre th:text="${name.time}"></pre>
-            <form action="/cusb-forum/replyPost" method="get">
+            <form action="/cusb-forum/replyPost" method="post">
                 <input type="hidden" value="${name.postId}">
                 <input type="submit" value="进入帖子" name="enter">
             </form>
