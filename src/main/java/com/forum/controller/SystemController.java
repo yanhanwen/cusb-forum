@@ -1,6 +1,7 @@
 package com.forum.controller;
 
 import com.forum.dao.PostMapper;
+import com.forum.entity.Forum;
 import com.forum.dao.UserMapper;
 import com.forum.entity.Floor;
 import com.forum.entity.Post;
@@ -57,6 +58,16 @@ public class SystemController {
     @GetMapping(value = "/yangzhimanager")
     public String yangzhinamager(Model map) {
         List<Post> list = systemService.listPostOfForum("t1");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+            }
+        }
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "yangzhimanager";
     }
@@ -78,6 +89,30 @@ public class SystemController {
         return "yangsheng";
     }
 
+    @GetMapping(value = "/forummanagement")
+    public String forummanagement(Model map) {
+        List<Forum> list = systemService.listForum();
+        map.addAttribute("list", list);
+        return "forummanagement";
+    }
+
+    @GetMapping(value = "/yangshengmanager")
+    public String yangshengmanager(Model map) {
+        List<Post> list = systemService.listPostOfForum("t2");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+            }
+        }
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
+        map.addAttribute("list",list);
+        return "yangshengmanager";
+    }
+
     @GetMapping(value = "/ziyuan")
     public String ziyuan(Model map) {
         List<Post> list = systemService.listPostOfForum("t3");
@@ -93,6 +128,22 @@ public class SystemController {
         map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "ziyuan";
+    }
+    @GetMapping(value = "/ziyuanmanager")
+    public String ziyuanmanager(Model map) {
+        List<Post> list = systemService.listPostOfForum("t3");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+            }
+        }
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
+        map.addAttribute("list",list);
+        return "ziyuanmanager";
     }
 
     @GetMapping(value = "/disablesendmsg")

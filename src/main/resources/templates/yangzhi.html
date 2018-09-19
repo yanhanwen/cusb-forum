@@ -5,35 +5,35 @@
     <title>养殖论坛</title>
 </head>
 <body>
-    <tr>
-        <td>
-            <h1>
-                置顶区
-            </h1>
-            <div th:each="name:${listtop}">
-                帖子名称：<pre th:text="${name.postName}"></pre>
-                访问量：<pre th:text="${name.visiteNum}"></pre>
-                回帖量：<pre th:text="${name.replyNum}"></pre>
-                主题：<pre th:text="${name.topic}"></pre>
-                <form action="/cusb-forum/showfloor" method="get">
-                    <input type="hidden" value="${name.postId}">
-                    <input type="submit" value="进入帖子" name="enter">
-                </form>
-            </div>
-            <h2>
-                非置顶区
-            </h2>
-            <div th:each="name1:${list}">
-                帖子名称：<pre th:text="${name1.postName}"></pre>
-                访问量：<pre th:text="${name1.visiteNum}"></pre>
-                回帖量：<pre th:text="${name1.replyNum}"></pre>
-                主题：<pre th:text="${name1.topic}"></pre>
-                <form action="/cusb-forum/showfloor" method="get">
-                    <input type="hidden" value="${name.postId}">
-                    <input type="submit" value="进入帖子" name="enter">
-                </form>
-            </div>
-        </td>
-    </tr>
+<tr>
+    <td>
+        <h1>
+            置顶区
+        </h1>
+        <div th:each="name:${listtop}">
+            帖子名称：<pre th:text="${name.postName}"></pre>
+            访问量：<pre th:text="${name.visiteNum}"></pre>
+            回帖量：<pre th:text="${name.replyNum}"></pre>
+            主题：<pre th:text="${name.topic}"></pre>
+            <form action="/cusb-forum/showfloor" method="get">
+                <input type="hidden" value="${name.postId}">
+                <input type="submit" value="进入帖子" name="enter">
+            </form>
+        </div>
+        <h2>
+            非置顶区
+        </h2>
+        <div th:each="name1:${list}">
+            帖子名称：<pre th:text="${name1.postName}"></pre>
+            访问量：<pre th:text="${name1.visiteNum}"></pre>
+            回帖量：<pre th:text="${name1.replyNum}"></pre>
+            主题：<pre th:text="${name1.topic}"></pre>
+            <form action="/cusb-forum/showfloor" method="get">
+                <input type="hidden" value="${name.postId}">
+                <input type="submit" value="进入帖子" name="enter">
+            </form>
+        </div>
+    </td>
+</tr>
 </body>
 </html>
