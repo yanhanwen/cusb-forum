@@ -50,7 +50,7 @@ public class CusbServiceImpl implements CusbService {
                 logger.error("password wrong,userId:{}",userId);
                 return -2;
             }
-            user.setStatus(1);//设置为登陆状态
+            user.setStatus(211);//设置为登陆状态
 //            session.setAttribute("用户",user);
             userDao.updateByPrimaryKey(user);
             return 0;
@@ -109,7 +109,7 @@ public class CusbServiceImpl implements CusbService {
             post.setPostId(uuid);
             post.setPostName(postName);
             post.setReplyNum(0);
-            post.setStatus(0);//0为非热帖
+            post.setStatus(211);//2为非热帖
             post.setUserId(userId);
             post.setVisiteNum(0);
         } catch (Exception e){
@@ -190,12 +190,6 @@ public class CusbServiceImpl implements CusbService {
     public int modifyInfo(User user)
     {
         userDao.updateByPrimaryKey(user);
-        return 0;
-    }
-
-    @Override
-    public int replyPost(Floor floor){
-        floorDao.insert(floor);
         return 0;
     }
 }

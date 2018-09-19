@@ -4,6 +4,7 @@ import com.forum.dao.PostMapper;
 import com.forum.dao.UserMapper;
 import com.forum.entity.Post;
 import com.forum.entity.User;
+import com.forum.service.api.CusbService;
 import com.forum.service.api.ManagerService;
 import com.forum.service.api.SystemService;
 import org.slf4j.Logger;
@@ -20,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/cusb-forum")
 public class SystemController {
+    @Autowired
+    CusbService cusbService;
     @Autowired
     SystemService systemService;
     @Autowired
@@ -38,10 +41,12 @@ public class SystemController {
         for(Post t:list){
             if(t.getStatus()/100 == 2){
                 listtop.add(t);
-                list.remove(t);
             }
         }
-        map.addAttribute("list",listtop);
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "yangzhi";
     }
@@ -60,10 +65,12 @@ public class SystemController {
         for(Post t:list){
             if(t.getStatus()/100 == 2){
                 listtop.add(t);
-                list.remove(t);
             }
         }
-        map.addAttribute("list",listtop);
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "yangsheng";
     }
@@ -75,10 +82,12 @@ public class SystemController {
         for(Post t:list){
             if(t.getStatus()/100 == 2){
                 listtop.add(t);
-                list.remove(t);
             }
         }
-        map.addAttribute("list",listtop);
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "ziyuan";
     }
@@ -99,16 +108,7 @@ public class SystemController {
 
     @GetMapping(value = "/showfloor")
     public String showFloor(Model map){
-        List<Post> list = systemService.listPostOfForum("t3");
-        List<Post> listtop = new ArrayList<>();
-        for(Post t:list){
-            if(t.getStatus()/100 == 2){
-                listtop.add(t);
-                list.remove(t);
-            }
-        }
-        map.addAttribute("list",listtop);
-        map.addAttribute("list",list);
+//        cusbService.replyPost();
         return "showfloor";
     }
 }
