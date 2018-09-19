@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr>
+    <td>
+        <div th:each="name:${list}">
+            ID：<pre th:text="${name.ip_id}"></pre>
+            用户ID：<pre th:text="${name.ip_userid}"></pre>
+            IP地址：<pre th:text="${name.ip_ip}"></pre>
+            上次封禁时间：<pre th:text="${name.ip_time}"></pre>
+        </div>
+    </td>
+</tr>
+</body>
+</html>

@@ -154,4 +154,21 @@ public class SystemController {
         cusbService.replyPost(userId,String postId,String floorText);
         return "showfloor";
     }
+
+    @GetMapping(value = "/ipmanager")
+    public String ipmanager(Model map) {
+        List<> list = systemService.listPostOfForum("t1");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+            }
+        }
+        for(Post t:listtop){
+            list.remove(t);
+        }
+        map.addAttribute("listtop",listtop);
+        map.addAttribute("list",list);
+        return "yangzhi";
+    }
 }
