@@ -63,7 +63,7 @@ public class CusbController {
         User user = new User();
         try{
             user.setLevel(0);//0为普通用户
-            user.setStatus(1);//1为登陆状态
+            user.setStatus(211);//2为登陆状态
             if(userDao.selectByPrimaryKey(userId) != null){
                 return "id重复";//重复
             }
