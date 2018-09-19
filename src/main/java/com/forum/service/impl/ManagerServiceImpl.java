@@ -71,12 +71,11 @@ public class ManagerServiceImpl implements ManagerService {
         int ret;
 
         int s = post.getStatus();
-        s = s / 10;
-        s = s % 10;
-        if ((s / 10) % 10  == 1)
-            post.setStatus(s + 10);
+
+        if (s / 100  == 1)
+            post.setStatus(s + 100);
         else
-            post.setStatus(s - 10);
+            post.setStatus(s - 100);
         ret = postDao.updateByPrimaryKey(post);
         if (ret != 1)
         {

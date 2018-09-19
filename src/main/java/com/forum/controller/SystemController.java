@@ -49,6 +49,14 @@ public class SystemController {
     @GetMapping(value = "/yangzhimanager")
     public String yangzhinamager(Model map) {
         List<Post> list = systemService.listPostOfForum("t1");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+                list.remove(t);
+            }
+        }
+        map.addAttribute("list",listtop);
         map.addAttribute("list",list);
         return "yangzhimanager";
     }
