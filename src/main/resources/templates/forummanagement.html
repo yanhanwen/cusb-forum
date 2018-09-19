@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>分论坛管理 管理员</title>
+</head>
+<body>
+<tr>
+    <td>
+        <div>
+            <form action="forummanagement.html" method="post" enctype="multipart/form-data">
+                论坛名称：<input type="text"  name="forumName"><br/>
+                论坛内容简介：<input type="text" name="forumText"><br/>
+                父论坛Id：<input type="text" name="fid"><br/>
+                <input type="submit" value="新建分论坛" name="newForum">
+            </form>
+        </div>
+        所有論壇：
+        <div th:each="name:${list}">
+            <div th:text="${name}"></div>
+            <form action="/cusb-forum/deleteForum" method="post" enctype="multipart/form-data">
+                <input type="text" th:value="${name.forumId}" style="display:none" name="forumId"/>
+                <input type="submit" value="删除" name="deleteForum">
+            </form>
+            <!--<form action="/cusb-forum/setPostTop" method="post" enctype="multipart/form-data">
+                <input type="text" value="${name.postId}" style="display:none" name="postId"/>
+                <input type="submit" value="置顶/取消" name="setPostTop">
+            </form>-->
+        </div>
+    </td>
+</tr>
+</body>
+</html>

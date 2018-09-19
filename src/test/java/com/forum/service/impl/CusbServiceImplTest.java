@@ -1,6 +1,7 @@
 package com.forum.service.impl;
 
 import com.forum.ForumApplication;
+import com.forum.dao.IpMapper;
 import com.forum.dao.PostMapper;
 import com.forum.dao.UserMapper;
 import com.forum.entity.Post;
@@ -32,6 +33,9 @@ public class CusbServiceImplTest
     @Autowired
     UserMapper userDao;
 
+    @Autowired
+    IpMapper ipDao;
+
     @Test
     public void queryPost()
     {
@@ -53,6 +57,7 @@ public class CusbServiceImplTest
     @Commit
     public void insert()
     {
+
         User user = new User();
         user.setUserId("2");
         user.setUserName("test_user");

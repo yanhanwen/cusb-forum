@@ -94,8 +94,10 @@ public class CusbController {
         }
         return "成功";
     }
-    @PostMapping("/newForum")
-    public void newForum(@RequestParam String forumName, @RequestParam String forumText,
+
+    @ResponseBody
+    @RequestMapping("/forummanagement")
+    public String newForum(@RequestParam String forumName, @RequestParam String forumText,
                          @RequestParam String fid){
         Forum forum=new Forum();
         try{
@@ -108,11 +110,12 @@ public class CusbController {
             throw new ForumException(ForumResultCode.PARAM_MISS);
         }
         managerService.adminAddForum(forum);
+        return "成功";
     }
 
-    @PostMapping("/deleteForum")
+    @ResponseBody
+    @RequestMapping("/deleteForum")
     public void deleteForum(@RequestParam String forumId){
-
         managerService.adminDeleteForum(forumId);
     }
 
@@ -162,4 +165,92 @@ public class CusbController {
         logger.error("error: ", e);
         return new ForumResult(ForumResultCode.SERVER_ERROR);
     }
+
+
+    @GetMapping(value="/sealList")
+    public String getTemporarySealList(Model model){
+        List<User> list = managerService.getSealList();
+        // model.
+        List<User> temporaryList=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            int status=list.get(i).getStatus()%100;
+
+            if(status<=30 && status>=20){
+                temporaryList.add(list.get(i));
+            }
+        }
+        model.addAttribute("temporarySealList",temporaryList);
+        return "sealList";
+    }
+    public String getPermanentSealList(Model model){
+        List<User> list = managerService.getSealList();
+        List<User> permanentList=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            int status=list.get(i).getStatus()%100;
+
+            if(status>=30 ){
+                permanentList.add(list.get(i));
+            }
+        }
+        model.addAttribute("permanentSealList",permanentList);
+        return "sealList";
+    }
+    //status 三位数表示百位1未登录，2登录，十位1不封，2暂时封，3永久封，个位1不禁言，2禁言
+    //帖子状态三位数百位1未置顶2置顶，十位1加精2不加精，个位
+    @GetMapping("/usermanagement")
+    public String getAllUsers(Model model){
+        List<User> allUsers=managerService.getAllUser();
+        model.addAttribute("list",allUsers);
+        return "usermanagement";
+    }
+    public User queryUser(@RequestParam String userId){
+        return managerService.queryUser(userId);
+    }
+    //删除用户，添加用户
+    public String deleteUser(@RequestParam String userId){
+        managerService.deleteUser(userId);
+        return "usermanagement";
+    }
+
+    @ResponseBody
+    @RequestMapping("/usermanagement")
+    public String newUser(@RequestParam String userName,@RequestParam String userPwd,
+                          @RequestParam int sex, @RequestParam String age, @RequestParam String userAdd,
+                          @RequestParam String userMail, @RequestParam String phone,@RequestParam int level,
+                          @RequestParam int status){
+        User user = new User();
+        try{
+
+            String userId = UUID.randomUUID().toString().replaceAll("-", "");
+            if(userDao.selectByPrimaryKey(userId) != null){
+                return "id重复";//重复
+            }
+            user.setUserId(userId);
+            user.setUserPwd(userPwd);
+            user.setUserName(userName);
+            Integer t = Integer.parseInt(age);
+            user.setAge(t);
+            if(t<0){
+                return "年龄错误";
+            }
+            user.setSex(sex);
+            user.setUserAdd(userAdd);
+            user.setUserMail(userMail);
+            user.setPhone(phone);
+            user.setLevel(level);//0为普通用户
+            user.setStatus(status);//1为登陆状态
+        } catch (Exception e) {
+            throw new ForumException(ForumResultCode.PARAM_MISS);
+        }
+        managerService.addUser(user);
+        return "成功";
+    }
+
+    @GetMapping("/levelmanagement")
+    public String getUsers(Model model){
+        List<User> allUsers=managerService.getAllUser();
+        model.addAttribute("list",allUsers);
+        return "levelmanagement";
+    }
+
 }
