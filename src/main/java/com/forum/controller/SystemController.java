@@ -151,7 +151,7 @@ public class SystemController {
 
     @GetMapping(value = "/showfloor")
     public String showFloor(Model map){
-//        cusbService.replyPost();
+        cusbService.replyPost(userId,String postId,String floorText);
         return "showfloor";
     }
 }
