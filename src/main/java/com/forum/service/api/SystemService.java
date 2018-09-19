@@ -15,4 +15,9 @@ public interface SystemService {
      **主题显示
      */
     List<Post> listPostOfTopic(String topic);
+
+    /*
+     **显示帖子
+     */
+    List<Post> listPostOfForum(String forumId);
 }

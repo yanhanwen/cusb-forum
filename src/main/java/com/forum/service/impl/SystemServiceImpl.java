@@ -30,4 +30,11 @@ public class SystemServiceImpl implements SystemService {
         list = postDao.selectByTopic(topic);
         return list;
     }
+
+    @Override
+    public List<Post> listPostOfForum(String forumId){
+        List<Post> list = new ArrayList<>();
+        list = postDao.selectByForum(forumId);
+        return list;
+    }
 }

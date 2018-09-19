@@ -36,12 +36,12 @@ public class CusbController {
 
     @GetMapping(value = "/index")
     public String index(Model map) {
-        List<Forum> list = systemService.listForum();
+        List<User> list = cusbService.getActiveUserList();
         List<String> nameList = new ArrayList<>();
-        for(Forum f:list){
-            nameList.add(f.getForumName());
+        for(User f:list){
+            nameList.add(f.getUserName());
         }
-        map.addAttribute("forumlist",nameList);
+        map.addAttribute("activeuserlist",nameList);
         return "index";
     }
 

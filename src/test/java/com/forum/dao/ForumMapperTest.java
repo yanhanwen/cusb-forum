@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,13 +21,13 @@ public class ForumMapperTest {
     ForumMapper forumDao;
 
     @Test
-    @Commit
+    @Rollback
     public void insert() {
         Forum record = new Forum();
-        record.setFid("12");
-        record.setForumId("123");
-        record.setForumName("测试论坛");
-        record.setForumText("666");
+        record.setFid("14");
+        record.setForumId("125");
+        record.setForumName("测试论坛3");
+        record.setForumText("哎呦");
         forumDao.insert(record);
     }
 }
