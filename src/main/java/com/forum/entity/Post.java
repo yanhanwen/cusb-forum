@@ -14,6 +14,8 @@ public class Post implements Serializable {
 
     private Integer replyNum;
 
+    private String topic;
+
     private Integer status;
 
     private String forumId;
@@ -62,6 +64,14 @@ public class Post implements Serializable {
         this.replyNum = replyNum;
     }
 
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
     public Integer getStatus() {
         return status;
     }
@@ -97,6 +107,7 @@ public class Post implements Serializable {
         sb.append(", createDate=").append(createDate);
         sb.append(", visiteNum=").append(visiteNum);
         sb.append(", replyNum=").append(replyNum);
+        sb.append(", topic=").append(topic);
         sb.append(", status=").append(status);
         sb.append(", forumId=").append(forumId);
         sb.append(", userId=").append(userId);

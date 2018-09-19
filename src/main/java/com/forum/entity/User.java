@@ -1,5 +1,6 @@
 package com.forum.entity;
 
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 public class User implements Serializable {

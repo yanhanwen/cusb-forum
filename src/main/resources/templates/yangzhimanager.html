@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>养殖论坛 版主</title>
+</head>
+<body>
+<tr>
+    <td>
+        <div th:each="name:${list}">
+            <div th:text="${name}"></div>
+            <form action="/cusb-forum/deletePost" method="post" enctype="multipart/form-data">
+                <input type="text" value="${name.postId}" style="display:none"/>
+                <input type="submit" value="删除" name="deletePost">
+            </form>
+            <form action="/cusb-forum/setPostTop" method="post" enctype="multipart/form-data">
+                <input type="text" value="${name.postId}" style="display:none"/>
+                <input type="submit" value="置顶/取消" name="setPostTop">
+            </form>
+        </div>
+    </td>
+</tr>
+</body>
+</html>

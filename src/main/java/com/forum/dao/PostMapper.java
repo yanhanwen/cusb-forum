@@ -13,4 +13,12 @@ public interface PostMapper {
     List<Post> selectAll();
 
     int updateByPrimaryKey(Post record);
+
+    List<Post> selectByUserId(String userId);
+
+    List<Post> selectByKeyword(String keyword);
+
+    List<Post> selectByTopic(String topic);
+
+    List<Post> selectByForum(String forumId);
 }

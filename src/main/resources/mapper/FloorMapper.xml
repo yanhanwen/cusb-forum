@@ -43,4 +43,9 @@
     select floor_id, floor_num, floor_good, floor_text, `status`, `time`, post_id, user_id
     from floor
   </select>
+  <select id="getMaxFloorNum" resultMap="BaseResultMap">
+    select max(floor_num)
+    from floor
+    where post_id = #{post_id}
+  </select>
 </mapper>

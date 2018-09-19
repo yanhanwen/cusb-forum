@@ -9,6 +9,9 @@ spring:
   thymeleaf:
     mode: LEGACYHTML5
     prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    cache: false
   http:
     multipart:
       max-file-size: 20Mb
