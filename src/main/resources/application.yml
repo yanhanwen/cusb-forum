@@ -24,16 +24,16 @@ spring:
   aop:
     auto: true
     proxy-target-class: true
-#  redis:
-#    database: 0
-#    host: 127.0.0.1
-#    port: 6379
-#    timeout: 10000
-#    pool:
-#      max-active: 8
-#      max-idle: 8
-#      min-idle: 1
-#      max-wait: -1
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10000
+    pool:
+      max-active: 8
+      max-idle: 8
+      min-idle: 1
+      max-wait: -1
 
 # LOGGING
 logging:
