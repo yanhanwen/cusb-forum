@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>回帖</title>
+</head>
+<body>
+<tr>
+    <td>
+        <div th:each="name:${list}">
+            帖子名称：<pre th:text="${name.postName}"></pre>
+            访问量：<pre th:text="${name.visiteNum}"></pre>
+            回帖量：<pre th:text="${name.replyNum}"></pre>
+            主题：<pre th:text="${name.topic}"></pre>
+            <form action="/cusb-forum/showfloor" method="get">
+                <input type="hidden" value="name.postId">
+                <input type="submit" value="回帖" name="enter">
+            </form>
+        </div>
+    </td>
+</tr>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.forum.service.api;
 
+import com.forum.entity.Floor;
 import com.forum.entity.Post;
 import com.forum.entity.User;
 
@@ -60,4 +61,9 @@ public interface CusbService {
      **修改自己的资料
      */
     int modifyInfo(User user);
+
+    /*
+     **回复帖子
+     */
+    int replyPost(Floor floor);
 }

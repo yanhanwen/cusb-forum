@@ -89,9 +89,14 @@ public class CusbServiceImpl implements CusbService {
 
     @Override
     public List<User> getActiveUserList() {
-        List<User> result;
-        result = userDao.selectActive();
-        return result;
+        List<User> result = userDao.selectAll();
+        List<User> ans = new ArrayList<>();
+        for(User user:result){
+            if(user.getStatus()/100 == 2){
+                ans.add(user);
+            }
+        }
+        return ans;
     }
 
     @Override
@@ -185,6 +190,12 @@ public class CusbServiceImpl implements CusbService {
     public int modifyInfo(User user)
     {
         userDao.updateByPrimaryKey(user);
+        return 0;
+    }
+
+    @Override
+    public int replyPost(Floor floor){
+        floorDao.insert(floor);
         return 0;
     }
 }

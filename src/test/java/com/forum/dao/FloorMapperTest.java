@@ -32,12 +32,11 @@ public class FloorMapperTest {
     @Rollback
     public void deleteByFloorId() {
         int t = dao.deleteByPrimaryKey("1");
-        Assert.assertEquals(t,1
-        );
+        Assert.assertEquals(t,1);
     }
 
     @Test
-//    @Rollback
+    @Rollback
     public void insert() {
         Floor f = new Floor();
         f.setFloorId("1");
@@ -51,8 +50,8 @@ public class FloorMapperTest {
     }
 
     @Test
-    @Rollback
     public void updateByFloorId() {
+        System.out.println(2%200);
     }
 
     @Test

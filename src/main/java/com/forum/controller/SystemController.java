@@ -28,6 +28,14 @@ public class SystemController {
     @GetMapping(value = "/yangzhi")
     public String yangzhi(Model map) {
         List<Post> list = systemService.listPostOfForum("t1");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+                list.remove(t);
+            }
+        }
+        map.addAttribute("list",listtop);
         map.addAttribute("list",list);
         return "yangzhi";
     }
@@ -35,6 +43,14 @@ public class SystemController {
     @GetMapping(value = "/yangsheng")
     public String yangsheng(Model map) {
         List<Post> list = systemService.listPostOfForum("t2");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+                list.remove(t);
+            }
+        }
+        map.addAttribute("list",listtop);
         map.addAttribute("list",list);
         return "yangsheng";
     }
@@ -42,7 +58,30 @@ public class SystemController {
     @GetMapping(value = "/ziyuan")
     public String ziyuan(Model map) {
         List<Post> list = systemService.listPostOfForum("t3");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+                list.remove(t);
+            }
+        }
+        map.addAttribute("list",listtop);
         map.addAttribute("list",list);
         return "ziyuan";
+    }
+
+    @GetMapping(value = "/showfloor")
+    public String showFloor(Model map){
+        List<Post> list = systemService.listPostOfForum("t3");
+        List<Post> listtop = new ArrayList<>();
+        for(Post t:list){
+            if(t.getStatus()/100 == 2){
+                listtop.add(t);
+                list.remove(t);
+            }
+        }
+        map.addAttribute("list",listtop);
+        map.addAttribute("list",list);
+        return "showfloor";
     }
 }
