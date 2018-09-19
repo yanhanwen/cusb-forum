@@ -3,24 +3,25 @@ package com.forum.controller;
 import com.forum.common.ForumException;
 import com.forum.common.ForumResult;
 import com.forum.common.ForumResultCode;
+import com.forum.entity.Forum;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
+import com.forum.service.api.ManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cusb-forum")
 public class CusbController {
     @Autowired
     CusbService cusbService;
+    @Autowired
+    ManagerService managerService;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -53,6 +54,43 @@ public class CusbController {
         int result = cusbService.regist(user);
         //todo,页面跳转逻辑，和返回信息
     }
+    @PostMapping("/newForum")
+    public void newForum(@RequestParam String forumName, @RequestParam String forumText,
+                         @RequestParam String fid){
+        Forum forum=new Forum();
+        try{
+            String forumId = UUID.randomUUID().toString().replaceAll("-", "");
+            forum.setForumId(forumId);
+            forum.setForumName(forumName);
+            forum.setForumText(forumText);
+            forum.setFid(fid);
+        } catch (Exception e) {
+            throw new ForumException(ForumResultCode.PARAM_MISS);
+        }
+        managerService.adminAddForum(forum);
+    }
+
+    @PostMapping("/deleteForum")
+    public void deleteForum(@RequestParam String forumId){
+
+        managerService.adminDeleteForum(forumId);
+    }
+
+    @PostMapping("/changeForum")
+    public void changeForum(@RequestParam String forumId,@RequestParam String forumName, @RequestParam String forumText,
+                         @RequestParam String fid){
+        Forum forum=new Forum();
+        try{
+            forum.setForumId(forumId);
+            forum.setForumName(forumName);
+            forum.setForumText(forumText);
+            forum.setFid(fid);
+        } catch (Exception e) {
+            throw new ForumException(ForumResultCode.PARAM_MISS);
+        }
+        managerService.adminChangeForum(forum);
+    }
+
 
     @PostMapping("/logout")
     public void logout(@RequestParam String userId){
