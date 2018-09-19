@@ -52,14 +52,14 @@ public class CusbController {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(@RequestParam String userId, @RequestParam String userPwd) {
         int result = cusbService.login(userId, userPwd);
         return "login";
     }
 
     @ResponseBody
-    @RequestMapping("/regist")
+    @PostMapping("/regist")
     public String regist(@RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName,
                          @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
                          @RequestParam String userMail, @RequestParam String phone) {
