@@ -161,11 +161,12 @@ public class SystemController {
     public String showFloor(Model map, @RequestParam String postId){
         List<Floor> list = systemService.listFloor(postId);
         map.addAttribute("list",list);
+        map.addAttribute("postId",postId);
         return "showfloor";
     }
 
     @ResponseBody
-    @GetMapping(value = "/replyPost")
+    @PostMapping(value = "/replyPost")
     public String replyPost(@RequestParam String postId,@RequestParam String floorText){
         cusbService.replyPost("001",postId,floorText);
         return "成功";

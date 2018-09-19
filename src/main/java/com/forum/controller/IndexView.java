@@ -25,4 +25,8 @@ public class IndexView{
     public String showFloor(){
         return "showfloor";
     }
+    @GetMapping(value = "/replyPost")
+    public String replyPost(){
+        return "showfloor";
+    }
 }
