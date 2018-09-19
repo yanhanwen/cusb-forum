@@ -29,7 +29,7 @@ public interface CusbService {
     /*
      **发文章
      */
-    int faPost(String userId,String forumId,String postName);
+    String faPost(String userId,String forumId,String postName);
 
     /*
      **发回帖楼层
@@ -60,4 +60,10 @@ public interface CusbService {
      **修改自己的资料
      */
     int modifyInfo(User user);
+
+
+    /*
+     **得到用户
+     */
+    User getUserById(String id);
 }

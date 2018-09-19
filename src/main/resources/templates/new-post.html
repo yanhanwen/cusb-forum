@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8"></meta>
+<title>title</title>
+</head>
+<body>
+
+<form action="/cusb-forum/newPost" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>
+                标题：
+            </td>
+            <td>
+                <input type="text" name="title"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                内容：
+            </td>
+            <td>
+                <textarea name="content" rows="5"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                论坛：
+            </td>
+            <td>
+                <input type="text" name="forum"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="发帖" name="post">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<a href="personal_center.html">返回</a>
+
+</body>
+</html>
