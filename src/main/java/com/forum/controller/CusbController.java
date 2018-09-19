@@ -2,15 +2,14 @@ package com.forum.controller;
 
 import com.forum.common.ForumException;
 import com.forum.common.ForumResult;
+import com.forum.entity.*;
 import com.forum.common.ForumResultCode;
-import com.forum.entity.Forum;
-import com.forum.entity.User;
-import com.forum.service.api.CusbService;
-import com.forum.service.api.ManagerService;
+import com.forum.dao.PostMapper;
 import com.forum.dao.UserMapper;
 import com.forum.entity.Forum;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
+import com.forum.service.api.ManagerService;
 import com.forum.service.api.SystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.*;
+
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cusb-forum")
@@ -37,6 +33,8 @@ public class CusbController {
     SystemService systemService;
     @Autowired
     UserMapper userDao;
+    @Autowired
+    PostMapper postDao;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -166,7 +164,6 @@ public class CusbController {
         return new ForumResult(ForumResultCode.SERVER_ERROR);
     }
 
-
     @GetMapping(value="/sealList")
     public String getTemporarySealList(Model model){
         List<User> list = managerService.getSealList();
@@ -253,4 +250,41 @@ public class CusbController {
         return "levelmanagement";
     }
 
+    @ResponseBody
+    @RequestMapping("/disablesendmsg")
+    public String disablesendmsg(@RequestParam String userId, @RequestParam String forumId) {
+        managerService.noSpeaking(userId, 2);
+        return "成功";
+    }
+
+    @ResponseBody
+    @RequestMapping("/enablesendmsg")
+    public String enablesendmsg(@RequestParam String userId, @RequestParam String forumId) {
+        managerService.noSpeaking(userId, 1);
+        return "成功";
+    }
+
+    @ResponseBody
+    @RequestMapping("/deletePost")
+    public String deletePost(@RequestParam String postId) {
+        System.out.println(postId);
+        managerService.deletePost(postId);
+        return "成功";
+    }
+
+    @ResponseBody
+    @RequestMapping("/setPostTop")
+    public String setPostTop(@RequestParam String postId) {
+        managerService.setPostTop(postId);
+        return "成功";
+    }
+
+    @RequestMapping("/updatePostPage")
+    public String updatePostPage(@RequestParam String postId) {
+
+        Post post;
+        post = postDao.selectByPrimaryKey(postId);
+
+        return "成功";
+    }
 }

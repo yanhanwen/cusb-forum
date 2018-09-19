@@ -14,7 +14,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> selectActive();
-
     List<User> selectUserByStatus(int status);
 }
