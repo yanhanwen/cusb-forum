@@ -92,24 +92,26 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public int faPost(String userId,String forumId,String postName){
+    public String faPost(String userId,String forumId,String postName){
         Post post = new Post();
+        String uuid;
         try{
             post.setCreateDate(new Date());
             post.setForumId(forumId);
-            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            uuid = UUID.randomUUID().toString().replaceAll("-", "");
             post.setPostId(uuid);
             post.setPostName(postName);
             post.setReplyNum(0);
             post.setStatus(211);//2为非热帖
             post.setUserId(userId);
             post.setVisiteNum(0);
+            post.setTopic("养猪");
         } catch (Exception e){
             logger.error("param error of forumId:{}",forumId);
-            return -1;
+            return "";
         }
         postDao.insert(post);
-        return 0;
+        return uuid;
     }
 
     @Override
@@ -183,5 +185,13 @@ public class CusbServiceImpl implements CusbService {
     {
         userDao.updateByPrimaryKey(user);
         return 0;
+    }
+
+    @Override
+    public User getUserById(String id)
+    {
+        User user;
+        user = userDao.selectByPrimaryKey(id);
+        return user;
     }
 }
