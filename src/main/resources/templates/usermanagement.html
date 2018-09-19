@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用戶管理 管理员</title>
+</head>
+<body>
+<tr>
+    <td>
+        <div>
+            <form action="usermanagement.html" method="post" enctype="multipart/form-data">
+                用户姓名：<input type="text"  name="userName"><br/>
+                用户密码：<input type="password" name="userPwd"><br/>
+                用户性别：<input type="text" name="sex"><br/>
+                用户年龄：<input type="text"  name="age"><br/>
+                用户地址：<input type="text" name="userAdd"><br/>
+                用户邮箱：<input type="text" name="userMail"><br/>
+                用户电话：<input type="text"  name="phone"><br/>
+                用户等级：<input type="text" name="level"><br/>
+                用户状态：<input type="text" name="status"><br/>
+                <input type="submit" value="新建用戶" name="newUser">
+            </form>
+        </div>
+        所有用戶：
+        <div th:each="name:${list}">
+            <div th:text="${name}"></div>
+            <form action="/cusb-forum/deleteUser" method="post" enctype="multipart/form-data">
+                <input type="text" th:value="${name.userId}" style="display:none" name="userId"/>
+                <input type="submit" value="删除用戶" name="deleteUser">
+            </form>
+            <!--<form action="/cusb-forum/setPostTop" method="post" enctype="multipart/form-data">
+                <input type="text" value="${name.postId}" style="display:none" name="postId"/>
+                <input type="submit" value="置顶/取消" name="setPostTop">
+            </form>-->
+        </div>
+    </td>
+</tr>
+</body>
+</html>

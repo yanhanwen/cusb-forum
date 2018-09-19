@@ -1,6 +1,7 @@
 package com.forum.controller;
 
 import com.forum.dao.PostMapper;
+import com.forum.entity.Forum;
 import com.forum.dao.UserMapper;
 import com.forum.entity.Post;
 import com.forum.entity.User;
@@ -83,6 +84,13 @@ public class SystemController {
         map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "yangsheng";
+    }
+
+    @GetMapping(value = "/forummanagement")
+    public String forummanagement(Model map) {
+        List<Forum> list = systemService.listForum();
+        map.addAttribute("list", list);
+        return "forummanagement";
     }
 
     @GetMapping(value = "/yangshengmanager")

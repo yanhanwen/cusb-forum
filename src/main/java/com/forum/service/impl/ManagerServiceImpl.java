@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import com.forum.dao.PostMapper;
 
 
+import java.util.List;
+
 @Service
 public class ManagerServiceImpl implements ManagerService {
     @Autowired
@@ -127,4 +129,33 @@ public class ManagerServiceImpl implements ManagerService {
 
 
 
+    //增加用户
+    public int addUser(User user){
+        return userDao.insert(user);
+    }
+
+    //删除用户
+    public int deleteUser(String userId){
+        return userDao.deleteByPrimaryKey(userId);
+    }
+
+    //查找用户
+    public User queryUser(String userId){
+        return userDao.selectByPrimaryKey(userId);
+    }
+
+    //获得所有用户
+    public List<User> getAllUser(){
+        return userDao.selectAll();
+    }
+
+    //指定版主
+    public void designatedModerator(String userId){
+
+    }
+    //获得封查列表
+    public List<User> getSealList(){
+        //调用dao中的方法
+        return userDao.selectAll();
+    }
 }
