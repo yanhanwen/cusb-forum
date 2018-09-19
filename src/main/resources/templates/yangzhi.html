@@ -16,7 +16,7 @@
                 回帖量：<pre th:text="${name.replyNum}"></pre>
                 主题：<pre th:text="${name.topic}"></pre>
                 <form action="/cusb-forum/showfloor" method="get">
-                    <input type="hidden" value="name.postId">
+                    <input type="hidden" value="${name.postId}">
                     <input type="submit" value="进入帖子" name="enter">
                 </form>
             </div>
@@ -29,7 +29,7 @@
                 回帖量：<pre th:text="${name1.replyNum}"></pre>
                 主题：<pre th:text="${name1.topic}"></pre>
                 <form action="/cusb-forum/showfloor" method="get">
-                    <input type="hidden" value="name1.postId">
+                    <input type="hidden" value="${name.postId}">
                     <input type="submit" value="进入帖子" name="enter">
                 </form>
             </div>
