@@ -12,7 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +34,9 @@ public class CusbServiceImpl implements CusbService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
+//    ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//    HttpServletRequest request = requestAttributes.getRequest();
+//    HttpSession session = request.getSession();
     @Override
     public int login(String userId,String userPwd){
         logger.info("start to login scan,userId:{}",userId);
@@ -43,6 +51,7 @@ public class CusbServiceImpl implements CusbService {
                 return -2;
             }
             user.setStatus(1);//设置为登陆状态
+//            session.setAttribute("用户",user);
             userDao.updateByPrimaryKey(user);
             return 0;
         }

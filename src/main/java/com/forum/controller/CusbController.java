@@ -4,6 +4,7 @@ import com.forum.common.ForumException;
 import com.forum.common.ForumResult;
 import com.forum.common.ForumResultCode;
 import com.forum.dao.UserMapper;
+import com.forum.entity.Forum;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
 import com.forum.service.api.SystemService;
@@ -33,14 +34,24 @@ public class CusbController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    @PostMapping("/login")
-    public void login(@RequestParam String userId, @RequestParam String userPwd) {
-        int result = cusbService.login(userId, userPwd);
-        //todo,页面跳转逻辑，和返回信息
+    @GetMapping(value = "/index")
+    public String index(Model map) {
+        List<Forum> list = systemService.listForum();
+        List<String> nameList = new ArrayList<>();
+        for(Forum f:list){
+            nameList.add(f.getForumName());
+        }
+        map.addAttribute("forumlist",nameList);
+        return "index";
     }
 
-    @ResponseBody
-    @PostMapping("/regist")
+    @RequestMapping("/login")
+    public String login(@RequestParam String userId, @RequestParam String userPwd) {
+        int result = cusbService.login(userId, userPwd);
+        return "login";
+    }
+
+    @RequestMapping("/regist")
     public String regist(@RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName,
                          @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
                          @RequestParam String userMail, @RequestParam String phone) {
@@ -87,12 +98,12 @@ public class CusbController {
         return cusbService.getActiveUserList();
     }
 
-    @RequestMapping("/showforum")
-    public ModelAndView showForum(ModelAndView  model){
-        model.setViewName("/showforum");
-        model.addObject("forumlist",systemService.listForum());
-        return model;
-    }
+//    @RequestMapping("/showforum")
+//    public ModelAndView showForum(ModelAndView  model){
+//        model.setViewName("/showforum");
+//        model.addObject("forumlist",systemService.listForum());
+//        return model;
+//    }
 
     @ExceptionHandler(ForumException.class)
     @ResponseBody
