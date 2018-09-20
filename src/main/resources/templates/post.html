@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+</head>
+<body>
+
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>标题</th>
+            <th>发帖时间</th>
+            <th>主题</th>
+            <th>回复数</th>
+        </tr>
+        <tr th:each="post:${list}">
+            <td th:text="${post.postName}"></td>
+            <td th:text="${post.createDate}"></td>
+            <td th:text="${post.topic}"></td>
+            <td th:text="${post.replyNum}"></td>
+        </tr>
+    </table>
+    <a href="personal_center.html">返回</a>
+</body>
+</html>

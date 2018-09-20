@@ -22,12 +22,10 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     PostMapper postDao;
     @Autowired
-<<<<<<< HEAD
     IpMapper ipDao;
-=======
+    @Autowired
     FloorMapper floorDao;
 
->>>>>>> 42bff8fd299e7c7a3df91b3d037669d3a8bf908b
     @Override
     public List<Forum> listForum(){
         List<Forum> list = new ArrayList<>();
@@ -48,20 +46,18 @@ public class SystemServiceImpl implements SystemService {
         list = postDao.selectByForum(forumId);
         return list;
     }
-<<<<<<< HEAD
+
     @Override
-    public List<Ip> listIp()
-    {
+    public List<Ip> listIp() {
         List<Ip> list = new ArrayList<>();
         list = ipDao.selectAll();
-        return  list;
-=======
+        return list;
+    }
 
     @Override
     public List<Floor> listFloor(String postId){
         List<Floor> list = new ArrayList<>();
         list = floorDao.selectAll();
         return list;
->>>>>>> 42bff8fd299e7c7a3df91b3d037669d3a8bf908b
     }
 }
