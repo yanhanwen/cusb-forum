@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8"></meta>
+    <title>用户中心</title>
 </head>
 <body>
 
+<div id="left" class="left">
+    <a href="modify.html">修改信息</a></br>
+    <a href="new-post.html">发表帖子</a></br>
+    <a href="post.html">已发表的贴子</a></br>
+</div>
+
+<div id="right" class="right">
+    <table>
+        <tr>
+            <td>ID：</td>
+            <td><p th:text="${id}"></td>
+        </tr>
+        <tr>
+            <td>用户名：</td>
+            <td><p th:text="${name}"></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td><p th:text="${sex}"></td>
+        </tr>
+        <tr>
+            <td>年龄：</td>
+            <td><p th:text="${age}"></td>
+        </tr>
+        <tr>
+            <td>地址：</td>
+            <td><p th:text="${addr}"></td>
+        </tr>
+        <tr>
+            <td>邮箱：</td>
+            <td><p th:text="${email}"></td>
+        </tr>
+        <tr>
+            <td>手机：</td>
+            <td><p th:text="${phone}"></td>
+        </tr>
+    </table>
+</div>
+
+<a href="index.html">返回</a>
+
 </body>
+    <style type="text/css">
+        .right
+        {
+            text-align:center;
+        }
+    </style>
 </html>

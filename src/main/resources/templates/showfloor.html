@@ -8,15 +8,16 @@
 <tr>
     <td>
         <div th:each="name:${list}">
-            帖子名称：<pre th:text="${name.postName}"></pre>
-            访问量：<pre th:text="${name.visiteNum}"></pre>
-            回帖量：<pre th:text="${name.replyNum}"></pre>
-            主题：<pre th:text="${name.topic}"></pre>
-            <form action="/cusb-forum/showfloor" method="get">
-                <input type="hidden" value="name.postId">
-                <input type="submit" value="回帖" name="enter">
-            </form>
+            楼层号：<pre th:text="${name.floorNum}"></pre>
+            赞数：<pre th:text="${name.floorGood}"></pre>
+            内容：<pre th:text="${name.floorText}"></pre>
+            时间：<pre th:text="${name.time}"></pre>
         </div>
+        <form action="/cusb-forum/replyPost" method="post">
+            <input type="hidden" th:value="${postId}" name="postId">
+            <input type="text" name="floorText">
+            <input type="submit" value="回帖" name="enter">
+        </form>
     </td>
 </tr>
 </body>

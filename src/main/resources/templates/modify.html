@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="UTF-8"></meta>
+<title>title</title>
+</head>
+<body>
+
+<table>
+<form action="/cusb-forum/modifyUserInfo" method="post" enctype="multipart/form-data">
+    <tr>
+        <td>用户名：</td>
+        <td><input type="text" name="userName" th:attr="value=${id}" /></td>
+    </tr>
+    <tr>
+        <td>性别：</td>
+        <td><input type="text" name="sex" th:attr="value=${sex}" /></td>
+    </tr>
+    <tr>
+        <td>年龄：</td>
+        <td><input type="text" name="age" th:attr="value=${age}" /></td>
+    </tr>
+    <tr>
+        <td>地址：</td>
+        <td><input type="text" name="userAdd" th:attr="value=${addr}" /></td>
+    </tr>
+    <tr>
+        <td>邮箱：</td>
+        <td><input type="text" name="userMail" th:attr="value=${email}" /></td>
+    </tr>
+    <tr>
+        <td>手机号：</td>
+        <td><input type="text" name="phone" th:attr="value=${phone}" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="提交" name="submit"></td>
+    </tr>
+
+</form>
+</table>
+<a href="personal_center.html">返回</a>
+</body>
+</html>

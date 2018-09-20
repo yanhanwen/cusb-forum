@@ -4,7 +4,6 @@ import com.forum.common.ForumException;
 import com.forum.common.ForumResultCode;
 import com.forum.dao.FloorMapper;
 import com.forum.dao.PostMapper;
-import com.forum.dao.ReplyMapper;
 import com.forum.dao.UserMapper;
 import com.forum.entity.*;
 import com.forum.service.api.CusbService;
@@ -12,11 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,9 +28,7 @@ public class CusbServiceImpl implements CusbService {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-//    ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-//    HttpServletRequest request = requestAttributes.getRequest();
-//    HttpSession session = request.getSession();
+    private Session session;
     @Override
     public int login(String userId,String userPwd){
         logger.info("start to login scan,userId:{}",userId);
@@ -51,7 +43,7 @@ public class CusbServiceImpl implements CusbService {
                 return -2;
             }
             user.setStatus(211);//设置为登陆状态
-//            session.setAttribute("用户",user);
+
             userDao.updateByPrimaryKey(user);
             return 0;
         }
@@ -100,24 +92,26 @@ public class CusbServiceImpl implements CusbService {
     }
 
     @Override
-    public int faPost(String userId,String forumId,String postName){
+    public String faPost(String userId,String forumId,String postName){
         Post post = new Post();
+        String uuid;
         try{
             post.setCreateDate(new Date());
             post.setForumId(forumId);
-            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            uuid = UUID.randomUUID().toString().replaceAll("-", "");
             post.setPostId(uuid);
             post.setPostName(postName);
             post.setReplyNum(0);
             post.setStatus(211);//2为非热帖
             post.setUserId(userId);
             post.setVisiteNum(0);
+            post.setTopic("养猪");
         } catch (Exception e){
             logger.error("param error of forumId:{}",forumId);
-            return -1;
+            return "";
         }
         postDao.insert(post);
-        return 0;
+        return uuid;
     }
 
     @Override
@@ -191,5 +185,13 @@ public class CusbServiceImpl implements CusbService {
     {
         userDao.updateByPrimaryKey(user);
         return 0;
+    }
+
+    @Override
+    public User getUserById(String id)
+    {
+        User user;
+        user = userDao.selectByPrimaryKey(id);
+        return user;
     }
 }

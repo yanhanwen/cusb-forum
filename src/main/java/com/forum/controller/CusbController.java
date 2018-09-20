@@ -17,9 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -49,21 +46,21 @@ public class CusbController {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(@RequestParam String userId, @RequestParam String userPwd) {
         int result = cusbService.login(userId, userPwd);
         return "login";
     }
 
     @ResponseBody
-    @RequestMapping("/regist")
+    @PostMapping("/regist")
     public String regist(@RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName,
                          @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
                          @RequestParam String userMail, @RequestParam String phone) {
         User user = new User();
         try{
             user.setLevel(0);//0为普通用户
-            user.setStatus(1);//1为登陆状态
+            user.setStatus(211);//2为登陆状态
             if(userDao.selectByPrimaryKey(userId) != null){
                 return "id重复";//重复
             }
@@ -142,6 +139,113 @@ public class CusbController {
     public List<User> getActiveUserList(){
         return cusbService.getActiveUserList();
     }
+
+
+
+    @GetMapping(value = {"personal_center"})
+    public String getUserInfo(Model map)
+    {
+        User user;
+        user = cusbService.getUserById("1");
+        map.addAttribute("id", user.getUserId());
+        map.addAttribute("name", user.getUserName());
+        if(user.getSex() == 0)
+        {
+            map.addAttribute("sex", "男");
+        }
+        else
+        {
+            map.addAttribute("sex", "女");
+        }
+        map.addAttribute("age", user.getAge());
+        map.addAttribute("addr", user.getUserAdd());
+        map.addAttribute("email", user.getUserMail());
+        map.addAttribute("phone", user.getPhone());
+        return "personal_center";
+    }
+
+    @GetMapping(value = {"modify"})
+    public String getModifyInfo(Model map)
+    {
+        User user;
+        user = cusbService.getUserById("1");
+        map.addAttribute("id", user.getUserId());
+        map.addAttribute("name", user.getUserName());
+        if(user.getSex() == 0)
+        {
+            map.addAttribute("sex", "男");
+        }
+        else
+        {
+            map.addAttribute("sex", "女");
+        }
+        map.addAttribute("age", user.getAge());
+        map.addAttribute("addr", user.getUserAdd());
+        map.addAttribute("email", user.getUserMail());
+        map.addAttribute("phone", user.getPhone());
+        return "modify";
+    }
+
+
+    @RequestMapping("/modifyUserInfo")
+    public String modifyUserInfo(@RequestParam String userName,
+                         @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
+                         @RequestParam String userMail, @RequestParam String phone) {
+        User user;
+        user = cusbService.getUserById("1");
+        try{
+            user.setUserName(userName);
+            Integer t = Integer.parseInt(age);
+            user.setAge(t);
+            if(t<0){
+                return "年龄错误";
+            }
+            if(sex != null && sex.equals("男"))
+            {
+                user.setSex(0);
+            }
+            else if(sex != null && sex.equals("女"))
+            {
+                user.setSex(1);
+            }
+            else
+            {
+                throw new ForumException(ForumResultCode.PARAM_INVALID);
+            }
+            user.setUserAdd(userAdd);
+            user.setUserMail(userMail);
+            user.setPhone(phone);
+            cusbService.modifyInfo(user);
+        } catch (Exception e) {
+            return "参数错误";//错误
+        }
+        return "redirect:personal_center";
+    }
+
+    @GetMapping(value = "new-post")
+    public String postAPost(Model map)
+    {
+        return "new-post";
+    }
+
+    @GetMapping(value = "post")
+    public String posted(Model map)
+    {
+        List<Post> list;
+        list = cusbService.queryPost("1");
+        map.addAttribute("list", list);
+        return "post";
+    }
+
+    @RequestMapping("/newPost")
+    public String newPost(@RequestParam String title, @RequestParam String content, @RequestParam String forum)
+    {
+        String postId = cusbService.faPost("1", forum, title);
+        cusbService.replyPost("1", postId, content);
+        return "redirect:personal_center";
+    }
+
+
 
 
     @ExceptionHandler(ForumException.class)
