@@ -5,6 +5,7 @@ import com.forum.dao.PostMapper;
 import com.forum.entity.Forum;
 import com.forum.dao.UserMapper;
 import com.forum.entity.Ip;
+import com.forum.entity.Floor;
 import com.forum.entity.Post;
 import com.forum.entity.User;
 import com.forum.service.api.CusbService;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,6 +164,7 @@ public class SystemController {
         return "enablesendmsg";
     }
 
+<<<<<<< HEAD
 //    @GetMapping(value = "/showfloor")
 //    public String showFloor(Model map){
 //        cusbService.replyPost(userId,String postId,String floorText);
@@ -182,5 +186,19 @@ public class SystemController {
 //        map.addAttribute("listtop",listtop);
         map.addAttribute("list",list);
         return "ipmanager";
+=======
+    @GetMapping(value = "/showfloor")
+    public String showFloor(Model map, @RequestParam String postId){
+        List<Floor> list = systemService.listFloor(postId);
+        map.addAttribute("list",list);
+        return "showfloor";
+>>>>>>> 42bff8fd299e7c7a3df91b3d037669d3a8bf908b
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/replyPost")
+    public String replyPost(@RequestParam String postId,@RequestParam String floorText){
+        cusbService.replyPost("001",postId,floorText);
+        return "成功";
     }
 }

@@ -49,21 +49,21 @@ public class CusbController {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public String login(@RequestParam String userId, @RequestParam String userPwd) {
         int result = cusbService.login(userId, userPwd);
         return "login";
     }
 
     @ResponseBody
-    @RequestMapping("/regist")
+    @PostMapping("/regist")
     public String regist(@RequestParam String userId, @RequestParam String userPwd, @RequestParam String userName,
                          @RequestParam String sex, @RequestParam String age, @RequestParam String userAdd,
                          @RequestParam String userMail, @RequestParam String phone) {
         User user = new User();
         try{
             user.setLevel(0);//0为普通用户
-            user.setStatus(1);//1为登陆状态
+            user.setStatus(211);//2为登陆状态
             if(userDao.selectByPrimaryKey(userId) != null){
                 return "id重复";//重复
             }

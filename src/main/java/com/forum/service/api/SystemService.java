@@ -1,5 +1,6 @@
 package com.forum.service.api;
 
+import com.forum.entity.Floor;
 import com.forum.entity.Forum;
 import com.forum.entity.Ip;
 import com.forum.entity.Post;
@@ -22,5 +23,12 @@ public interface SystemService {
      */
     List<Post> listPostOfForum(String forumId);
 
+<<<<<<< HEAD
     List<Ip> listIp();
+=======
+    /*
+     **显示所有回帖
+     */
+    List<Floor> listFloor(String postId);
+>>>>>>> 42bff8fd299e7c7a3df91b3d037669d3a8bf908b
 }

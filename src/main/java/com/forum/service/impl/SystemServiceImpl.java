@@ -1,8 +1,10 @@
 package com.forum.service.impl;
 
+import com.forum.dao.FloorMapper;
 import com.forum.dao.ForumMapper;
 import com.forum.dao.IpMapper;
 import com.forum.dao.PostMapper;
+import com.forum.entity.Floor;
 import com.forum.entity.Forum;
 import com.forum.entity.Ip;
 import com.forum.entity.Post;
@@ -20,7 +22,12 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     PostMapper postDao;
     @Autowired
+<<<<<<< HEAD
     IpMapper ipDao;
+=======
+    FloorMapper floorDao;
+
+>>>>>>> 42bff8fd299e7c7a3df91b3d037669d3a8bf908b
     @Override
     public List<Forum> listForum(){
         List<Forum> list = new ArrayList<>();
@@ -41,11 +48,20 @@ public class SystemServiceImpl implements SystemService {
         list = postDao.selectByForum(forumId);
         return list;
     }
+<<<<<<< HEAD
     @Override
     public List<Ip> listIp()
     {
         List<Ip> list = new ArrayList<>();
         list = ipDao.selectAll();
         return  list;
+=======
+
+    @Override
+    public List<Floor> listFloor(String postId){
+        List<Floor> list = new ArrayList<>();
+        list = floorDao.selectAll();
+        return list;
+>>>>>>> 42bff8fd299e7c7a3df91b3d037669d3a8bf908b
     }
 }
